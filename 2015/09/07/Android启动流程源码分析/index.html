@@ -1,0 +1,589 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Android启动流程源码分析 | louis.chen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="louis.chen">
+    
+
+    
+    <meta name="description" content="启动过程分为三个阶段：
+
+
+BootLoader引导程序启动
+Linux Kernel内核启动
+Android系统启动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android启动流程源码分析">
+<meta property="og:url" content="http://chenfuduo.me/2015/09/07/Android启动流程源码分析/index.html">
+<meta property="og:site_name" content="louis.chen">
+<meta property="og:description" content="启动过程分为三个阶段：
+
+
+BootLoader引导程序启动
+Linux Kernel内核启动
+Android系统启动">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/1.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/2.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/3.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/4.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/5.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/6.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/7.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/8.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/9.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/10.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/11.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/12.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/13.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/14.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/15.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/16.PNG">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/17.PNG">
+<meta property="og:updated_time" content="2015-09-06T16:34:39.500Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android启动流程源码分析">
+<meta name="twitter:description" content="启动过程分为三个阶段：
+
+
+BootLoader引导程序启动
+Linux Kernel内核启动
+Android系统启动">
+
+    
+    <link rel="alternative" href="/atom.xml" title="louis.chen" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="louis.chen" title="louis.chen"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="louis.chen">louis.chen</a></h1>
+				<h2 class="blog-motto">纸上得来终觉浅,绝知此事要躬行。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/project">项目</a></li>
+					
+						<li><a href="/about">资源</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chenfuduo.me">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/07/Android启动流程源码分析/" title="Android启动流程源码分析" itemprop="url">Android启动流程源码分析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-06T16:33:25.000Z" itemprop="datePublished"> 发表于 2015-09-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>启动过程分为<strong>三个</strong>阶段：</p>
+<blockquote>
+<ul>
+<li>BootLoader引导程序启动</li>
+<li>Linux Kernel内核启动</li>
+<li>Android系统启动</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<p>阅读源码的工具是<code>SourceInsight</code>，源代码是Android4.2.2，先看下怎么使用<code>SourceInsight</code>阅读源码。</p>
+<ul>
+<li>第一步，新建project，如下：</li>
+</ul>
+<p><img src="http://7xljei.com1.z0.glb.clouddn.com/1.PNG" alt="1"></p>
+<ul>
+<li>第二步，选择Android源代码的位置，如下：</li>
+</ul>
+<p><img src="http://7xljei.com1.z0.glb.clouddn.com/2.PNG" alt="2"></p>
+<ul>
+<li>第三步，全部选择右侧的Android源代码的子文件夹，点击<code>Add Tree</code>，出现<code>4</code>图的效果，完后，点击<code>Close关闭</code>，如下：</li>
+</ul>
+<p><img src="http://7xljei.com1.z0.glb.clouddn.com/3.PNG" alt="3"><br><img src="http://7xljei.com1.z0.glb.clouddn.com/4.PNG" alt="4"></p>
+<p>现在源码就导入到<code>SourceInsight</code>中了，如下：<br><img src="http://7xljei.com1.z0.glb.clouddn.com/5.PNG" alt="5"></p>
+<hr>
+<p>当引导程序启动Linux内核后，会加载各种驱动和数据结构，当有了驱动以后，开始启动Android系统同时会加载用户级别的第一个进程<code>init</code><strong>（system\core\init.c）</strong>代码如下：<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建文件夹 挂载</span></span><br><span class="line">    mkdir(<span class="string">"/dev"</span>, <span class="number">0755</span>);</span><br><span class="line">    mkdir(<span class="string">"/proc"</span>, <span class="number">0755</span>);</span><br><span class="line">    mkdir(<span class="string">"/sys"</span>, <span class="number">0755</span>);</span><br><span class="line"></span><br><span class="line">    mount(<span class="string">"tmpfs"</span>, <span class="string">"/dev"</span>, <span class="string">"tmpfs"</span>, MS_NOSUID, <span class="string">"mode=0755"</span>);</span><br><span class="line">    mkdir(<span class="string">"/dev/pts"</span>, <span class="number">0755</span>);</span><br><span class="line">    mkdir(<span class="string">"/dev/socket"</span>, <span class="number">0755</span>);  </span><br><span class="line">    mount(<span class="string">"proc"</span>, <span class="string">"/proc"</span>, <span class="string">"proc"</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    mount(<span class="string">"sysfs"</span>, <span class="string">"/sys"</span>, <span class="string">"sysfs"</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    INFO(<span class="string">"reading config file\n"</span>);</span><br><span class="line">    <span class="comment">// 加载init.rc配置文件</span></span><br><span class="line">    init_parse_config_file(<span class="string">"/init.rc"</span>);</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如下图：<br><img src="http://7xljei.com1.z0.glb.clouddn.com/6.PNG" alt="6"></p>
+<hr>
+<p>加载<code>init.rc</code>文件，会启动一个<code>Zygote</code>进程，此进程是Android系统的一个母进程，<code>用来启动Android的其他服务进程</code>，代码：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-system-server&#10;    class main&#10;    socket zygote stream 660 root system&#10;    onrestart write /sys/android_power/request_state wake&#10;    onrestart write /sys/power/state on&#10;    onrestart restart media&#10;onrestart restart netd</span><br></pre></td></tr></table></figure></p>
+<p>具体如下图：<br><img src="http://7xljei.com1.z0.glb.clouddn.com/7.PNG" alt="7"></p>
+<hr>
+<p>在这里有<code>/system/bin/app_process</code>，这里的<code>app_process</code>肯定是可执行文件，搜索<code>app_process</code>，如下：</p>
+<p><img src="http://7xljei.com1.z0.glb.clouddn.com/8.PNG" alt="8"></p>
+<p>代码如下：<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span>* <span class="keyword">const</span> argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    AppRuntime runtime;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i = runtime.addVmArguments(argc, argv);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Parse runtime arguments.  Stop at first unrecognized option.</span></span><br><span class="line">    <span class="keyword">bool</span> zygote = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">bool</span> startSystemServer = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">bool</span> application = <span class="literal">false</span>;</span><br><span class="line">   </span><br><span class="line">    runtime.mParentDir = parentDir;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (zygote) &#123;</span><br><span class="line">        runtime.start(<span class="string">"com.android.internal.os.ZygoteInit"</span>,</span><br><span class="line">                startSystemServer ? <span class="string">"start-system-server"</span> : <span class="string">""</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (className) &#123;</span><br><span class="line">        <span class="comment">// Remainder of args get passed to startup class main()</span></span><br><span class="line">        runtime.mClassName = className;</span><br><span class="line">        runtime.mArgC = argc - i;</span><br><span class="line">        runtime.mArgV = argv + i;</span><br><span class="line">        runtime.start(<span class="string">"com.android.internal.os.RuntimeInit"</span>,</span><br><span class="line">                application ? <span class="string">"application"</span> : <span class="string">"tool"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Error: no class name or --zygote supplied.\n"</span>);</span><br><span class="line">        app_usage();</span><br><span class="line">        LOG_ALWAYS_FATAL(<span class="string">"app_process: no class name or --zygote supplied."</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在上面的代码中，看到了<code>AppRuntime</code>，在当前的类中，有下面的代码：<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> AppRuntime : <span class="keyword">public</span> AndroidRuntime</span><br></pre></td></tr></table></figure></p>
+<p>这里的<code>AndroidRuntime</code>不就是Android架构图中的第三层的<code>AndroidRuntime</code>嘛，而<code>AppRuntime</code>是继承自它的。</p>
+<p>另外，在上面的代码中，有这样的代码：<br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">runtime.start(<span class="string">"com.android.internal.os.ZygoteInit"</span>,</span><br><span class="line">                startSystemServer ? <span class="string">"start-system-server"</span> : <span class="string">""</span>);</span><br></pre></td></tr></table></figure></p>
+<p>这里面的<code>com.android.internal.os.ZygoteInit</code>很明显是java的代码，OK，这样，c++代码就调用到了java代码。</p>
+<hr>
+<p>接着看<code>com.android.internal.os.ZygoteInit</code>类，如下：<br><img src="http://7xljei.com1.z0.glb.clouddn.com/9.PNG" alt="9"><br>代码如下：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String argv[])</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">// 加载Android依赖的类</span></span><br><span class="line">    preload();</span><br><span class="line">    <span class="comment">// 启动系统服务</span></span><br><span class="line">    startSystemServer();</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>点进去，看看<code>preload()</code>方法，如下：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">preload</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        preloadClasses();</span><br><span class="line">        preloadResources();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>点进<code>preloadClasses()</code>方法擦看：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">preloadClasses</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    InputStream is = ClassLoader.getSystemClassLoader().</span><br><span class="line">    getResourceAsStream(PRELOADED_CLASSES);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>点进去擦看<code>PRELOADED_CLASSES</code>，如下：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String PRELOADED_CLASSES = <span class="string">"preloaded-classes"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>ok，此时来到源代码目录下，如下：<br><img src="http://7xljei.com1.z0.glb.clouddn.com/10.PNG" alt="10"><br>记事本打开，发现内容如下：<br><img src="http://7xljei.com1.z0.glb.clouddn.com/11.PNG" alt="11"></p>
+<p>再次回到<code>com.android.internal.os.ZygoteInit</code>的main()方法，擦看<code>startSystemServer()</code>方法：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">startSystemServer</span><span class="params">()</span></span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">            args </span>= <span class="keyword">new</span> String[] &#123;</span><br><span class="line">                <span class="string">"--setuid=1000"</span>,</span><br><span class="line">                <span class="string">"--setgid=1000"</span>,</span><br><span class="line">                <span class="string">"--setgroups=1001,1002,1003,1004,1005,1006,1007,1008,                       1009,1010,1018,3001,3002,3003,3006"</span>,</span><br><span class="line">                <span class="string">"--capabilities=130104352,130104352"</span>,</span><br><span class="line">                <span class="string">"--rlimit=8,"</span>,</span><br><span class="line">                <span class="string">"--runtime-init"</span>,</span><br><span class="line">                <span class="string">"--nice-name=system_server"</span>,</span><br><span class="line">                <span class="string">"com.android.server.SystemServer"</span>,</span><br><span class="line">          ...</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* Request to fork the system server process */</span></span><br><span class="line">			<span class="comment">// 母进程开始分叉服务 启动SystemServer</span></span><br><span class="line">            pid = Zygote.forkSystemServer(</span><br><span class="line">                    parsedArgs.uid, parsedArgs.gid,</span><br><span class="line">                    parsedArgs.gids, debugFlags, rlimits,</span><br><span class="line">                    parsedArgs.permittedCapabilities,</span><br><span class="line">                    parsedArgs.effectiveCapabilities);</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>接着看<code>SystemServer</code>类，如下：<br><img src="http://7xljei.com1.z0.glb.clouddn.com/12.PNG" alt="12"></p>
+<p>main()方法的代码如下：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="comment">// 加载jni库</span></span><br><span class="line">       System.loadLibrary(<span class="string">"android_servers"</span>);</span><br><span class="line">       <span class="comment">// 调用native方法</span></span><br><span class="line">       init1(args);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么<code>init1(args)</code>方法为native方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">native</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init1</span><span class="params">(String[] args)</span></span>;</span><br></pre></td></tr></table></figure>
+<p> <code>android_servers</code>是jni代码，在这里肯定是搜索不到的，但是这个jni文件和当前的java代码的目录是对应的，如下：<br> <img src="http://7xljei.com1.z0.glb.clouddn.com/13.PNG" alt="13"></p>
+<p> 查看<code>Android.mk</code>文件，看到有下面的代码：<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">LOCAL_MODULE:= libandroid_servers</span><br></pre></td></tr></table></figure></p>
+<p> 去掉lib，正式<code>android_servers</code>.</p>
+<p> 接着查看jni目录下的<code>com_android_server_SystemServer</code>文件，如下：<br>  <img src="http://7xljei.com1.z0.glb.clouddn.com/14.PNG" alt="14"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 类似java的抽象方法</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="function"><span class="keyword">int</span> <span class="title">system_init</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">android_server_SystemServer_init1</span><span class="params">(JNIEnv* env, jobject clazz)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="comment">// 转调</span></span><br><span class="line">    system_init();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * JNI registration.</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">static</span> JNINativeMethod gMethods[] = &#123;</span><br><span class="line">    <span class="comment">/* name, signature, funcPtr */</span></span><br><span class="line">    <span class="comment">// 函数指针 把init1方法映射到android_server_SystemServer_init1</span></span><br><span class="line">    &#123; <span class="string">"init1"</span>, <span class="string">"([Ljava/lang/String;)V"</span>, (<span class="keyword">void</span>*) android_server_SystemServer_init1 &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>接着查看<code>system_init()</code>方法的代码，如下：<br>  <img src="http://7xljei.com1.z0.glb.clouddn.com/15.PNG" alt="15"><br><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">   <span class="keyword">extern</span> <span class="string">"C"</span> <span class="keyword">status_t</span> system_init()</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">	<span class="comment">// 启动硬件的服务</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">strcmp</span>(propBuf, <span class="string">"1"</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// Start the SurfaceFlinger</span></span><br><span class="line">        SurfaceFlinger::instantiate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    AndroidRuntime* runtime = AndroidRuntime::getRuntime();</span><br><span class="line"></span><br><span class="line">    LOGI(<span class="string">"System server: starting Android services.\n"</span>);</span><br><span class="line">	<span class="comment">// 启动完硬件服务后，又回到SystemServer的init2方法</span></span><br><span class="line">    runtime-&gt;callStatic(<span class="string">"com/android/server/SystemServer"</span>, <span class="string">"init2"</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以，由上面的代码，回到<code>SystemServer</code>的<code>init2()</code>方法。<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">init2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	        Slog.i(TAG, <span class="string">"Entered the Android system server!"</span>);</span><br><span class="line">	        Thread thr = <span class="keyword">new</span> ServerThread();</span><br><span class="line">	        thr.setName(<span class="string">"android.server.ServerThread"</span>);</span><br><span class="line">	        thr.start();</span><br><span class="line">	    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中<code>ServerThread</code>是内部类，主要看它的<code>run()</code>方法：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">//...</span></span><br><span class="line">		    <span class="comment">// 开启Android各种服务并且添加到ServiceManager去管理</span></span><br><span class="line">            Slog.i(TAG, <span class="string">"Entropy Mixer"</span>);</span><br><span class="line">            ServiceManager.addService(<span class="string">"entropy"</span>, <span class="keyword">new</span> EntropyMixer());</span><br><span class="line"></span><br><span class="line">            Slog.i(TAG, <span class="string">"Power Manager"</span>);</span><br><span class="line">            power = <span class="keyword">new</span> PowerManagerService();</span><br><span class="line">            ServiceManager.addService(Context.POWER_SERVICE, power);</span><br><span class="line"></span><br><span class="line">            Slog.i(TAG, <span class="string">"Activity Manager"</span>);</span><br><span class="line">            context = ActivityManagerService.main(factoryTest);</span><br><span class="line"></span><br><span class="line">            Slog.i(TAG, <span class="string">"Display Manager"</span>);</span><br><span class="line">            display = <span class="keyword">new</span> DisplayManagerService(context, wmHandler, uiHandler);</span><br><span class="line">            ServiceManager.addService(Context.DISPLAY_SERVICE, display, <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">            Slog.i(TAG, <span class="string">"Telephony Registry"</span>);</span><br><span class="line">            telephonyRegistry = <span class="keyword">new</span> TelephonyRegistry(context);</span><br><span class="line">            ServiceManager.addService(<span class="string">"telephony.registry"</span>, telephonyRegistry);</span><br><span class="line"></span><br><span class="line">            Slog.i(TAG, <span class="string">"Scheduling Policy"</span>);</span><br><span class="line">            ServiceManager.addService(Context.SCHEDULING_POLICY_SERVICE,</span><br><span class="line">                    <span class="keyword">new</span> SchedulingPolicyService());</span><br><span class="line">                    </span><br><span class="line">             </span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">                    </span><br><span class="line">        <span class="comment">// We now tell the activity manager it is okay to run third party</span></span><br><span class="line">        <span class="comment">// code.  It will call back into us once it has gotten to the state</span></span><br><span class="line">        <span class="comment">// where third party code can really run (but before it has actually</span></span><br><span class="line">        <span class="comment">// started launching the initial applications), for us to complete our</span></span><br><span class="line">        <span class="comment">// initialization.</span></span><br><span class="line">		<span class="comment">// 各种服务开启后调用ActivityManagerService.systemReady</span></span><br><span class="line">        ((ActivityManagerService)ActivityManagerNative.getDefault())</span><br><span class="line">                .systemReady(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                Slog.i(TAG, <span class="string">"Making services ready"</span>);</span><br><span class="line">                </span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure></p>
+<p>接着去看<code>ActivityManagerService.systemReady</code>方法，如下：<br>  <img src="http://7xljei.com1.z0.glb.clouddn.com/16.PNG" alt="16"><br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> ActivityStack mMainStack;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">systemReady</span><span class="params">(<span class="keyword">final</span> Runnable goingCallback)</span> </span>&#123;</span><br><span class="line">	        <span class="comment">//...</span></span><br><span class="line">			<span class="comment">// 打开第一个Activity</span></span><br><span class="line">	            mMainStack.resumeTopActivityLocked(<span class="keyword">null</span>);</span><br><span class="line">	        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>接着查看<code>ActivityStack</code>的<code>resumeTopActivityLocked</code>方法,如下：<br>  <img src="http://7xljei.com1.z0.glb.clouddn.com/17.PNG" alt="17"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">resumeTopActivityLocked</span><span class="params">(ActivityRecord prev)</span> </span>&#123;</span><br><span class="line">	        <span class="comment">// Find the first activity that is not finishing.</span></span><br><span class="line">			<span class="comment">// 没有已经打开的Activity next为 null</span></span><br><span class="line">	        ActivityRecord next = topRunningActivityLocked(<span class="keyword">null</span>);</span><br><span class="line">	</span><br><span class="line">	        <span class="comment">// Remember how we'll process this pause/resume situation, and ensure</span></span><br><span class="line">	        <span class="comment">// that the state is reset however we wind up proceeding.</span></span><br><span class="line">	        <span class="keyword">final</span> <span class="keyword">boolean</span> userLeaving = mUserLeaving;</span><br><span class="line">	        mUserLeaving = <span class="keyword">false</span>;</span><br><span class="line">	</span><br><span class="line">	        <span class="keyword">if</span> (next == <span class="keyword">null</span>) &#123;</span><br><span class="line">	            <span class="comment">// There are no more activities!  Let's just start up the</span></span><br><span class="line">	            <span class="comment">// Launcher...</span></span><br><span class="line"></span><br><span class="line">	            <span class="keyword">if</span> (mMainStack) &#123;</span><br><span class="line">					<span class="comment">// 启动lucher应用的锁屏界面</span></span><br><span class="line">	                <span class="keyword">return</span> mService.startHomeActivityLocked();</span><br><span class="line">	            &#125;</span><br><span class="line">	        &#125;</span><br></pre></td></tr></table></figure>
+<p>到此，Android系统启动完成，打开了Luncher应用的Home界面。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://chenfuduo.me/2015/09/07/Android启动流程源码分析/" data-title="Android启动流程源码分析 | louis.chen" data-tsina="2338582935" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/09/03/下拉刷新/"  title="下拉刷新">
+ <strong>下一篇：</strong><br/> 
+ <span>下拉刷新
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/09/07/Android启动流程源码分析/" data-title="Android启动流程源码分析" data-url="http://chenfuduo.me/2015/09/07/Android启动流程源码分析/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/移动开发/" title="移动开发">移动开发<sup>52</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/移动开发/" title="移动开发">移动开发<sup>52</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自定义View/" title="自定义View">自定义View<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI-UE/" title="UI/UE">UI/UE<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Support-Library/" title="Design Support Library">Design Support Library<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自定义控件/" title="自定义控件">自定义控件<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ViewDragHelper/" title="ViewDragHelper">ViewDragHelper<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/EventBus/" title="EventBus">EventBus<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bundle/" title="Bundle">Bundle<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.vogella.com/tutorials/android.html" target="_blank" title="Vogella">Vogella</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2338582935&verifier=59b78413&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> louis.chen,student of USTC,Focus on mobile develop. <br/>
+			It is my amibition to make beautiful apps.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2338582935" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/leerduo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="louis.chen">louis.chen</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"chenlouis"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F63c029dba1e367df2c8ffa39a309056a' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
