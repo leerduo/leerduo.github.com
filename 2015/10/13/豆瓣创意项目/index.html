@@ -4,26 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Circular dependencies cannot exist in RelativeLayout | louis.chen</title>
+    <title>豆瓣创意项目 | louis.chen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="louis.chen">
     
 
     
-    <meta name="description" content="在做自定义View的时候，遇到了下面的一个错误：java.lang.IllegalStateException: Circular dependencies cannot exist in RelativeLayout
-这个错误还是第一次遇到，主要是在RelativeLayout,有几个控件循环引用导致的。">
+    <meta name="description" content="豆瓣提供了很多好玩的api,用这些api可以开发出来一款很好的app。今晚做了大致的UI框架。效果如下：
+源码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Circular dependencies cannot exist in RelativeLayout">
-<meta property="og:url" content="http://chenfuduo.me/2015/08/19/Circular-dependencies-cannot-exist-in-RelativeLayout/index.html">
+<meta property="og:title" content="豆瓣创意项目">
+<meta property="og:url" content="http://chenfuduo.me/2015/10/13/豆瓣创意项目/index.html">
 <meta property="og:site_name" content="louis.chen">
-<meta property="og:description" content="在做自定义View的时候，遇到了下面的一个错误：java.lang.IllegalStateException: Circular dependencies cannot exist in RelativeLayout
-这个错误还是第一次遇到，主要是在RelativeLayout,有几个控件循环引用导致的。">
-<meta property="og:updated_time" content="2015-08-19T02:18:54.675Z">
+<meta property="og:description" content="豆瓣提供了很多好玩的api,用这些api可以开发出来一款很好的app。今晚做了大致的UI框架。效果如下：
+源码">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/doubantest.gif">
+<meta property="og:updated_time" content="2015-10-13T15:54:13.207Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Circular dependencies cannot exist in RelativeLayout">
-<meta name="twitter:description" content="在做自定义View的时候，遇到了下面的一个错误：java.lang.IllegalStateException: Circular dependencies cannot exist in RelativeLayout
-这个错误还是第一次遇到，主要是在RelativeLayout,有几个控件循环引用导致的。">
+<meta name="twitter:title" content="豆瓣创意项目">
+<meta name="twitter:description" content="豆瓣提供了很多好玩的api,用这些api可以开发出来一款很好的app。今晚做了大致的UI框架。效果如下：
+源码">
 
     
     <link rel="alternative" href="/atom.xml" title="louis.chen" type="application/atom+xml">
@@ -85,14 +86,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/19/Circular-dependencies-cannot-exist-in-RelativeLayout/" title="Circular dependencies cannot exist in RelativeLayout" itemprop="url">Circular dependencies cannot exist in RelativeLayout</a>
+      <a href="/2015/10/13/豆瓣创意项目/" title="豆瓣创意项目" itemprop="url">豆瓣创意项目</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-19T01:13:23.000Z" itemprop="datePublished"> 发表于 2015-08-19</time>
+    <time datetime="2015-10-13T15:51:11.000Z" itemprop="datePublished"> 发表于 2015-10-13</time>
     
   </p>
 </header>
@@ -105,14 +106,8 @@
 		
 		</div>
 		
-		<p>在做自定义View的时候，遇到了下面的一个错误：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: Circular dependencies cannot exist in RelativeLayout</span><br></pre></td></tr></table></figure></p>
-<p>这个错误还是第一次遇到，主要是在<code>RelativeLayout</code>,有几个控件循环引用导致的。</p>
-<a id="more"></a>
-<p>详细的log如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">08-19 01:08:09.120    1331-1331/me.chenfuduo.customviews E/AndroidRuntime&#65109; FATAL EXCEPTION: main&#10;    java.lang.IllegalStateException: Circular dependencies cannot exist in RelativeLayout&#10;            at android.widget.RelativeLayout$DependencyGraph.getSortedViews(RelativeLayout.java:1321)&#10;            at android.widget.RelativeLayout.sortChildren(RelativeLayout.java:316)&#10;            at android.widget.RelativeLayout.onMeasure(RelativeLayout.java:337)&#10;            at android.view.View.measure(View.java:15172)&#10;            at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:4814)&#10;            at android.widget.FrameLayout.onMeasure(FrameLayout.java:310)&#10;            at android.support.v7.internal.widget.ContentFrameLayout.onMeasure(ContentFrameLayout.java:124)&#10;            at android.view.View.measure(View.java:15172)&#10;            at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:4814)&#10;            at android.support.v7.internal.widget.ActionBarOverlayLayout.onMeasure(ActionBarOverlayLayout.java:444)&#10;            at android.view.View.measure(View.java:15172)&#10;            at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:4814)&#10;            at android.widget.FrameLayout.onMeasure(FrameLayout.java:310)&#10;            at android.view.View.measure(View.java:15172)&#10;            at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:4814)&#10;            at android.widget.LinearLayout.measureChildBeforeLayout(LinearLayout.java:1390)&#10;            at android.widget.LinearLayout.measureVertical(LinearLayout.java:681)&#10;            at android.widget.LinearLayout.onMeasure(LinearLayout.java:574)&#10;            at android.view.View.measure(View.java:15172)&#10;            at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:4814)&#10;            at android.widget.FrameLayout.onMeasure(FrameLayout.java:310)&#10;            at com.android.internal.policy.impl.PhoneWindow$DecorView.onMeasure(PhoneWindow.java:2148)&#10;            at android.view.View.measure(View.java:15172)&#10;            at android.view.ViewRootImpl.performMeasure(ViewRootImpl.java:1848)&#10;            at android.view.ViewRootImpl.measureHierarchy(ViewRootImpl.java:1100)&#10;            at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:1273)&#10;            at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:998)&#10;            at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:4212)&#10;            at android.view.Choreographer$CallbackRecord.run(Choreographer.java:725)&#10;            at android.view.Choreographer.doCallbacks(Choreographer.java:555)&#10;            at android.view.Choreographer.doFrame(Choreographer.java:525)&#10;            at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:711)&#10;            at android.os.Handler.handleCallback(Handler.java:615)&#10;            at android.os.Handler.dispatchMessage(Handler.java:92)&#10;            at android.os.Looper.loop(Looper.java:137)&#10;            at android.app.ActivityThread.main(ActivityThread.java:4745)&#10;            at java.lang.reflect.Method.invokeNative(Native Method)&#10;            at java.lang.reflect.Method.invoke(Method.java:511)&#10;            at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:786)&#10;            at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:553)&#10;            at dalvik.system.NativeStart.main(Native Method)</span><br></pre></td></tr></table></figure></p>
-<p>我的布局如下：<br><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">RelativeLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    <span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span></span><br><span class="line">    <span class="attribute">xmlns:app</span>=<span class="value">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:paddingBottom</span>=<span class="value">"@dimen/activity_vertical_margin"</span></span><br><span class="line">    <span class="attribute">android:paddingLeft</span>=<span class="value">"@dimen/activity_horizontal_margin"</span></span><br><span class="line">    <span class="attribute">android:paddingRight</span>=<span class="value">"@dimen/activity_horizontal_margin"</span></span><br><span class="line">    <span class="attribute">android:paddingTop</span>=<span class="value">"@dimen/activity_vertical_margin"</span></span><br><span class="line">    <span class="attribute">tools:context</span>=<span class="value">"me.chenfuduo.customviews.DefineCustomViewsActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">TextView</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:text</span>=<span class="value">"Select a shape"</span></span><br><span class="line">        <span class="attribute">android:id</span>=<span class="value">"@+id/tvPrompt"</span></span><br><span class="line">        <span class="attribute">android:layout_alignParentLeft</span>=<span class="value">"true"</span></span><br><span class="line">        <span class="attribute">android:textSize</span>=<span class="value">"20sp"</span></span><br><span class="line">        <span class="attribute">android:textColor</span>=<span class="value">"#2196f3"</span></span><br><span class="line">        /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">me.chenfuduo.customviews.ShapeSelectorView</span>   </span><br><span class="line">        <span class="attribute">android:id</span>=<span class="value">"@+id/shapeSelector"</span></span><br><span class="line">        <span class="attribute">app:shapeColor</span>=<span class="value">"#2196f3"</span></span><br><span class="line">        <span class="attribute">app:displayShapeName</span>=<span class="value">"true"</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_above</span>=<span class="value">"@+id/btnSelect"</span></span><br><span class="line">        <span class="attribute">android:layout_alignParentLeft</span>=<span class="value">"true"</span></span><br><span class="line">        <span class="attribute">android:layout_below</span>=<span class="value">"@+id/tvPrompt"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="title">Button</span></span><br><span class="line">        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span></span><br><span class="line">        <span class="attribute">android:id</span>=<span class="value">"@+id/btnSelect"</span></span><br><span class="line">        <span class="attribute">android:layout_below</span>=<span class="value">"@id/shapeSelector"</span></span><br><span class="line">        <span class="attribute">android:text</span>=<span class="value">"select"</span></span><br><span class="line">        /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="title">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>可以看到在<code>me.chenfuduo.customviews.ShapeSelectorView</code>这个控件中，有下面的属性：<br><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">android:layout_above="@+id/btnSelect"</span><br></pre></td></tr></table></figure></p>
-<p> 在<code>Button</code>控件中，有下面的属性：<br> <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">android:layout_below="@id/shapeSelector"</span><br></pre></td></tr></table></figure></p>
-<p> 所以他们两个循环引用了，导致了出现前面的错误。</p>
+		<p>豆瓣提供了很多好玩的api,用这些api可以开发出来一款很好的app。今晚做了大致的UI框架。效果如下：<br><img src="http://7xljei.com1.z0.glb.clouddn.com/doubantest.gif" alt="效果图"></p>
+<p><a href="https://github.com/leerduo/DouBanPro" target="_blank" rel="external">源码</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -135,7 +130,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenfuduo.me/2015/08/19/Circular-dependencies-cannot-exist-in-RelativeLayout/" data-title="Circular dependencies cannot exist in RelativeLayout | louis.chen" data-tsina="2338582935" class="share clearfix">
+	  <div data-url="http://chenfuduo.me/2015/10/13/豆瓣创意项目/" data-title="豆瓣创意项目 | louis.chen" data-tsina="2338582935" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -148,19 +143,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/08/24/Window-LFU/" title="Window LFU">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Window LFU</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/08/13/Guide文档翻译任务-大家快来参与吧/"  title="Guide文档翻译任务-大家快来参与吧">
+<a href="/2015/10/12/开源校招小秘源代码/"  title="开源校招小秘源代码">
  <strong>下一篇：</strong><br/> 
- <span>Guide文档翻译任务-大家快来参与吧
+ <span>开源校招小秘源代码
 </span>
 </a>
 </div>
@@ -169,7 +156,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/08/19/Circular-dependencies-cannot-exist-in-RelativeLayout/" data-title="Circular dependencies cannot exist in RelativeLayout" data-url="http://chenfuduo.me/2015/08/19/Circular-dependencies-cannot-exist-in-RelativeLayout/"></div>
+	<div class="ds-thread" data-thread-key="2015/10/13/豆瓣创意项目/" data-title="豆瓣创意项目" data-url="http://chenfuduo.me/2015/10/13/豆瓣创意项目/"></div>
 </section>
 
 
