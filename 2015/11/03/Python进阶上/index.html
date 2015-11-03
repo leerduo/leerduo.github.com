@@ -1,0 +1,595 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Python进阶上 | louis.chen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="louis.chen">
+    
+
+    
+    <meta name="description" content="Python进阶上，包括词典，文件的读写，模块，函数的参数传递。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python进阶上">
+<meta property="og:url" content="http://chenfuduo.me/2015/11/03/Python进阶上/index.html">
+<meta property="og:site_name" content="louis.chen">
+<meta property="og:description" content="Python进阶上，包括词典，文件的读写，模块，函数的参数传递。">
+<meta property="og:updated_time" content="2015-11-03T12:41:27.246Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python进阶上">
+<meta name="twitter:description" content="Python进阶上，包括词典，文件的读写，模块，函数的参数传递。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="louis.chen" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="louis.chen" title="louis.chen"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="louis.chen">louis.chen</a></h1>
+				<h2 class="blog-motto">纸上得来终觉浅,绝知此事要躬行。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/project">项目</a></li>
+					
+						<li><a href="/about">资源</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chenfuduo.me">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/03/Python进阶上/" title="Python进阶上" itemprop="url">Python进阶上</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-03T12:32:14.000Z" itemprop="datePublished"> 发表于 2015-11-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#词典"><span class="toc-number">1.</span> <span class="toc-text">词典</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#词典元素的循环调用"><span class="toc-number">1.2.</span> <span class="toc-text">词典元素的循环调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#词典的常用方法"><span class="toc-number">1.3.</span> <span class="toc-text">词典的常用方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文本文件的输入输出"><span class="toc-number">2.</span> <span class="toc-text">文本文件的输入输出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建文件对象"><span class="toc-number">2.1.</span> <span class="toc-text">创建文件对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件对象的方法"><span class="toc-number">2.2.</span> <span class="toc-text">文件对象的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模块"><span class="toc-number">3.</span> <span class="toc-text">模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引入模块"><span class="toc-number">3.1.</span> <span class="toc-text">引入模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜索路径"><span class="toc-number">3.2.</span> <span class="toc-text">搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块包"><span class="toc-number">3.3.</span> <span class="toc-text">模块包</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数的参数传递"><span class="toc-number">4.</span> <span class="toc-text">函数的参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关键字传递"><span class="toc-number">4.1.</span> <span class="toc-text">关键字传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数默认值"><span class="toc-number">4.2.</span> <span class="toc-text">参数默认值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#包裹传递"><span class="toc-number">4.3.</span> <span class="toc-text">包裹传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解包裹"><span class="toc-number">4.4.</span> <span class="toc-text">解包裹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#混合"><span class="toc-number">4.5.</span> <span class="toc-text">混合</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>Python进阶上，包括词典，文件的读写，模块，函数的参数传递。</p>
+<a id="more"></a>
+<h1 id="词典">词典</h1><p>之前我们说了，列表是Python里的一个类。一个特定的表，比如说nl = [1,3,8]，就是这个类的一个对象。我们可以调用这个对象的一些方法，比如 nl.append(15)。 我们要介绍一个新的类，<code>词典 (dictionary)</code>。与列表相似，词典也可以储存多个元素。这种储存多个元素的对象称为容器(container)。</p>
+<h2 id="基本概念">基本概念</h2><p>常见的创建词典的方法:<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;dic = &#123;<span class="string">'tom'</span>:<span class="number">11</span>, <span class="string">'sam'</span>:<span class="number">57</span>,<span class="string">'lily'</span>:<span class="number">100</span>&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> type(dic)</span><br></pre></td></tr></table></figure></p>
+<p>词典和表类似的地方，是包含有多个元素，每个元素以逗号分隔。但词典的元素包含有两部分，键和值，常见的是以字符串来表示键，也可以使用数字或者真值来表示键（不可变的对象可以作为键）。值可以是任意对象。键和值两者一一对应。</p>
+<p>比如上面的例子中，‘tom’对应11，’sam对应57，’lily’对应100</p>
+<p>与表不同的是，词典的元素没有顺序。你不能通过下标引用元素。词典是通过键来引用。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> dic[<span class="string">'tom'</span>]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;dic[<span class="string">'tom'</span>] = <span class="number">30</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> dic</span><br></pre></td></tr></table></figure></p>
+<p>构建一个新的空的词典：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;dic = &#123;&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> dic</span><br></pre></td></tr></table></figure></p>
+<p>在词典中增添一个新元素的方法：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;dic[<span class="string">'lilei'</span>] = <span class="number">99</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> dic</span><br></pre></td></tr></table></figure></p>
+<p>这里，我们引用一个新的键，并赋予它对应的值。</p>
+<h2 id="词典元素的循环调用">词典元素的循环调用</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dic = &#123;<span class="string">'lilei'</span>: <span class="number">90</span>, <span class="string">'lily'</span>: <span class="number">100</span>, <span class="string">'sam'</span>: <span class="number">57</span>, <span class="string">'tom'</span>: <span class="number">90</span>&#125;</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> dic:</span><br><span class="line">    <span class="keyword">print</span> dic[key]</span><br></pre></td></tr></table></figure>
+<p>在循环中，dict的每个键，被提取出来，赋予给key变量。</p>
+<p>通过print的结果，我们可以再次确认，dic中的元素是没有顺序的。</p>
+<h2 id="词典的常用方法">词典的常用方法</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> dic.keys()           <span class="comment"># 返回dic所有的键</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> dic.values()         <span class="comment"># 返回dic所有的值</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> dic.items()          <span class="comment"># 返回dic所有的元素（键值对）</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;dic.clear()                <span class="comment"># 清空dic，dict变为&#123;&#125;</span></span><br><span class="line">另外有一个很常用的用法：</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">del</span> dic[<span class="string">'tom'</span>]             <span class="comment"># 删除 dic 的‘tom’元素</span></span><br><span class="line"><span class="keyword">del</span>是Python中保留的关键字，用于删除对象。</span><br></pre></td></tr></table></figure>
+<p>与表类似，你可以用len()查询词典中的元素总数。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> len(dic)</span><br></pre></td></tr></table></figure></p>
+<h1 id="文本文件的输入输出">文本文件的输入输出</h1><p>Python具有基本的文本文件读写功能。Python的标准库提供有更丰富的读写功能。</p>
+<p>文本文件的读写主要通过open()所构建的文件对象来实现。</p>
+<h2 id="创建文件对象">创建文件对象</h2><p>我们打开一个文件，并使用一个对象来表示该文件：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">对象名 = open(文件名，模式)</span><br></pre></td></tr></table></figure></p>
+<p>最常用的模式有：</p>
+<blockquote>
+<ul>
+<li>r 打开只读文件，该文件必须存在。</li>
+<li>r+ 打开可读写的文件，该文件必须存在。</li>
+<li>w 打开只写文件，若文件存在则文件长度清为0，即该文件内容会消失。若文件不存在则建立该文件。</li>
+<li>w+ 打开可读写文件，若文件存在则文件长度清为零，即该文件内容会消失。若文件不存在则建立该文件。</li>
+<li>a 以附加的方式打开只写文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾，即文件原先的内容会被保留。</li>
+<li>a+ 以附加方式打开可读写的文件。若文件不存在，则会建立该文件，如果文件存在，写入的数据会被加到文件尾后，即文件原先的内容会被保留。</li>
+</ul>
+</blockquote>
+<p>上述的形态字符串都可以再加一个b字符，如rb、w+b或ab＋等组合，加入b 字符用来告诉函数库打开的文件为二进制文件，而非纯文字文件。<br>比如：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;f = open(<span class="string">"test.txt"</span>,<span class="string">"r"</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="文件对象的方法">文件对象的方法</h2><p>读取：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">content = f.read(N)          <span class="comment"># 读取N bytes的数据</span></span><br><span class="line"></span><br><span class="line">content = f.readline()       <span class="comment"># 读取一行</span></span><br><span class="line"></span><br><span class="line">content = f.readlines()      <span class="comment"># 读取所有行，储存在列表中，每个元素是一行。</span></span><br></pre></td></tr></table></figure></p>
+<p>写入：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f.write(<span class="string">'I like apple!\n'</span>)      <span class="comment"># 将'I like apple'写入文件并换行</span></span><br></pre></td></tr></table></figure></p>
+<p>关闭文件：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f.close()   <span class="comment"># 不要忘记关闭文件</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="模块">模块</h1><p>我们之前看到了函数和对象。从本质上来说，它们都是为了更好的组织已经有的程序，以方便重复利用。</p>
+<p>模块(module)也是为了同样的目的。在Python中，一个.py文件就构成一个模块。通过模块，你可以调用其它文件中的程序。</p>
+<h2 id="引入模块">引入模块</h2><p>我们先写一个first.py文件，内容如下：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">laugh</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'HaHaHaHa'</span></span><br></pre></td></tr></table></figure></p>
+<p>再写一个second.py，并引入first中的程序：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> first   <span class="comment">#将first文件引入</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    first.laugh()</span><br></pre></td></tr></table></figure></p>
+<p>在second.py中，我们使用了first.py中定义的laugh()函数。</p>
+<p>引入模块后，可以通过 模块.对象 的方式来调用引入模块中的某个对象。上面例子中，first为引入的模块，laugh()是我们所引入的对象。</p>
+<p>Python中还有其它的引入方式：</p>
+<blockquote>
+<ul>
+<li>import a as b             # 引入模块a，并将模块a重命名为b</li>
+<li>from a import function1   # 从模块a中引入function1对象。调用a中对象时，我们不用再说明模块，即直接使用function1，而不是a.function1。</li>
+<li>from a import *           # 从模块a中引入所有对象。调用a中对象时，我们不用再说明模块，即直接使用对象，而不是a.对象。<br>这些引用方式，可以方便后面的程序书写。</li>
+</ul>
+</blockquote>
+<h2 id="搜索路径">搜索路径</h2><p>Python会在以下路径中搜索它想要寻找的模块：</p>
+<blockquote>
+<ul>
+<li>程序所在的文件夹</li>
+<li>操作系统环境变量PYTHONPATH所包含的路径</li>
+<li>标准库的安装路径</li>
+</ul>
+</blockquote>
+<p>如果你有自定义的模块，或者下载的模块，可以根据情况放在相应的路径，以便Python可以找到。</p>
+<h2 id="模块包">模块包</h2><p>可以将功能相似的模块放在同一个文件夹（比如说this_dir）中，构成一个模块包。通过<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import this_dir.module&#10;&#24341;&#20837;this_dir&#25991;&#20214;&#22841;&#20013;&#30340;module&#27169;&#22359;&#12290;</span><br></pre></td></tr></table></figure></p>
+<p>该文件夹中必须包含一个<code>__init__.py</code> 的文件，提醒Python，该文件夹为一个模块包。<strong>init</strong>.py 可以是一个空文件。</p>
+<h1 id="函数的参数传递">函数的参数传递</h1><p>我们已经接触过函数(function)的参数(arguments)传递。当时我们根据位置，传递对应的参数。我们将接触更多的参数传递方式。</p>
+<p>回忆一下<code>位置传递</code>：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(a,b,c)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a+b+c</span><br><span class="line"></span><br><span class="line">print(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure></p>
+<p>在调用 f 时，1，2，3根据位置分别传递给了a,b,c。</p>
+<h2 id="关键字传递">关键字传递</h2><p>有些情况下，用位置传递会感觉比较死板。关键字(keyword)传递是根据每个参数的名字传递参数。关键字并不用遵守位置的对应关系。依然沿用上面f的定义，更改调用方式：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(f(c=<span class="number">3</span>,b=<span class="number">2</span>,a=<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
+<p>关键字传递可以和位置传递混用。<code>但位置参数要出现在关键字参数之前：</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(f(<span class="number">1</span>,c=<span class="number">3</span>,b=<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="参数默认值">参数默认值</h2><p>在定义函数的时候，使用形如a=19的方式，可以给参数赋予默认值(default)。如果该参数最终没有被传递值，将使用该默认值。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(a,b,c=<span class="number">10</span>)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a+b+c</span><br><span class="line"></span><br><span class="line">print(f(<span class="number">3</span>,<span class="number">2</span>))</span><br><span class="line">print(f(<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
+<p>在第一次调用函数f时， 我们并没有足够的值，c没有被赋值，c将使用默认值10.</p>
+<p>第二次调用函数的时候，c被赋值为1，不再使用默认值。</p>
+<h2 id="包裹传递">包裹传递</h2><p>在定义函数时，我们有时候并不知道调用的时候会传递多少个参数。这时候，包裹(packing)位置参数，或者包裹关键字参数，来进行参数传递，会非常有用。</p>
+<p>下面是包裹位置传递的例子：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(*name)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> type(name)</span><br><span class="line">    <span class="keyword">print</span> name</span><br><span class="line"></span><br><span class="line">func(<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>)</span><br><span class="line">func(<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+<p>两次调用，尽管参数个数不同，都基于同一个func定义。在func的参数表中，所有的参数被name收集，根据位置合并成一个元组(tuple)，这就是包裹位置传递。</p>
+<p>为了提醒Python参数，name是包裹位置传递所用的元组名，在定义func时，在name前加*号。</p>
+<p>下面是包裹关键字传递的例子：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(**dict)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> type(dict)</span><br><span class="line">    <span class="keyword">print</span> dict</span><br><span class="line"></span><br><span class="line">func(a=<span class="number">1</span>,b=<span class="number">9</span>)</span><br><span class="line">func(m=<span class="number">2</span>,n=<span class="number">1</span>,c=<span class="number">11</span>)</span><br></pre></td></tr></table></figure></p>
+<p>与上面一个例子类似，dict是一个字典，收集所有的关键字，传递给函数func。为了提醒Python，参数dict是包裹关键字传递所用的字典，在dict前加 <em> </em>。</p>
+<p>包裹传递的关键在于定义函数时，在相应元组或字典前加 <em> 或 </em> * 。</p>
+<h2 id="解包裹">解包裹</h2><ul>
+<li>和 **，也可以在调用的时候使用，即解包裹(unpacking), 下面为例：<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(a,b,c)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> a,b,c</span><br><span class="line"></span><br><span class="line">args = (<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">func(*args)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在这个例子中，所谓的解包裹，就是在传递tuple时，让tuple的每一个元素对应一个位置参数。在调用func时使用 <em> ，是为了提醒Python：我想要把args拆成分散的三个元素，分别传递给a,b,c。（设想一下在调用func时，args前面没有 </em> 会是什么后果？）</p>
+<p>相应的，也存在对词典的解包裹，使用相同的func定义，然后：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dict = &#123;<span class="string">'a'</span>:<span class="number">1</span>,<span class="string">'b'</span>:<span class="number">2</span>,<span class="string">'c'</span>:<span class="number">3</span>&#125;</span><br><span class="line">func(**dict)</span><br></pre></td></tr></table></figure></p>
+<p>在传递词典dict时，让词典的每个键值对作为一个关键字传递给func。</p>
+<h2 id="混合">混合</h2><p>在定义或者调用参数时，参数的几种传递方式可以混合。但在过程中要小心前后顺序。基本原则是：先位置，再关键字，再包裹位置，再包裹关键字，并且根据上面所说的原理细细分辨。</p>
+<p>注意：请注意定义时和调用时的区分。包裹和解包裹并不是相反操作，是两个相对独立的过程。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Python学习/">Python学习</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python学习/">Python学习</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://chenfuduo.me/2015/11/03/Python进阶上/" data-title="Python进阶上 | louis.chen" data-tsina="2338582935" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/03/Python进阶下/" title="Python进阶下">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Python进阶下</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/03/Python基础下/"  title="Python基础下">
+ <strong>下一篇：</strong><br/> 
+ <span>Python基础下
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/11/03/Python进阶上/" data-title="Python进阶上" data-url="http://chenfuduo.me/2015/11/03/Python进阶上/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#词典"><span class="toc-number">1.</span> <span class="toc-text">词典</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#词典元素的循环调用"><span class="toc-number">1.2.</span> <span class="toc-text">词典元素的循环调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#词典的常用方法"><span class="toc-number">1.3.</span> <span class="toc-text">词典的常用方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文本文件的输入输出"><span class="toc-number">2.</span> <span class="toc-text">文本文件的输入输出</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建文件对象"><span class="toc-number">2.1.</span> <span class="toc-text">创建文件对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件对象的方法"><span class="toc-number">2.2.</span> <span class="toc-text">文件对象的方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模块"><span class="toc-number">3.</span> <span class="toc-text">模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引入模块"><span class="toc-number">3.1.</span> <span class="toc-text">引入模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搜索路径"><span class="toc-number">3.2.</span> <span class="toc-text">搜索路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块包"><span class="toc-number">3.3.</span> <span class="toc-text">模块包</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数的参数传递"><span class="toc-number">4.</span> <span class="toc-text">函数的参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关键字传递"><span class="toc-number">4.1.</span> <span class="toc-text">关键字传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数默认值"><span class="toc-number">4.2.</span> <span class="toc-text">参数默认值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#包裹传递"><span class="toc-number">4.3.</span> <span class="toc-text">包裹传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解包裹"><span class="toc-number">4.4.</span> <span class="toc-text">解包裹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#混合"><span class="toc-number">4.5.</span> <span class="toc-text">混合</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Python学习/" title="Python学习">Python学习<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/移动开发/" title="移动开发">移动开发<sup>62</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/移动开发/" title="移动开发">移动开发<sup>62</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python学习/" title="Python学习">Python学习<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI-UE/" title="UI/UE">UI/UE<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自定义View/" title="自定义View">自定义View<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Support-Library/" title="Design Support Library">Design Support Library<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ViewDragHelper/" title="ViewDragHelper">ViewDragHelper<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自定义控件/" title="自定义控件">自定义控件<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/EventBus/" title="EventBus">EventBus<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bundle/" title="Bundle">Bundle<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.vogella.com/tutorials/android.html" target="_blank" title="Vogella">Vogella</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2338582935&verifier=59b78413&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> louis.chen,student of USTC,Focus on mobile develop. <br/>
+			It is my amibition to make beautiful apps.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2338582935" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/leerduo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="louis.chen">louis.chen</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"chenlouis"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F63c029dba1e367df2c8ffa39a309056a' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
