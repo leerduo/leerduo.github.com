@@ -4,69 +4,27 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>A summary of sliding tab of ViewPager with Fragment | louis.chen</title>
+    <title>Error:SSL peer shut down incorrectly | louis.chen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="louis.chen">
     
 
     
-    <meta name="description" content="复习Fragment的一点总结，ViewPager结合Fragment使用的时候，常常有实现下面的效果：
-
-常见的实现方式有：
-
-Fragment + ActionBar(5.0弃用，改为TabLayout)
-Android Support library的TabLayout
-第三方的库
-
-常见的第三方的库：
-
-
-ViewPagerIndicator
-SmartTabLayout
-PagerSli">
+    <meta name="description" content="今天在Android Studio中导入项目的时候，遇到下面的一个问题：Error:SSL peer shut down incorrectly
+解决方案：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A summary of sliding tab of ViewPager with Fragment">
-<meta property="og:url" content="http://chenfuduo.me/2015/08/02/A-summary-of-sliding-tab-of-ViewPager-with-Fragment/index.html">
+<meta property="og:title" content="Error:SSL peer shut down incorrectly">
+<meta property="og:url" content="http://chenfuduo.me/2015/12/15/Error-SSL-peer-shut-down-incorrectly/index.html">
 <meta property="og:site_name" content="louis.chen">
-<meta property="og:description" content="复习Fragment的一点总结，ViewPager结合Fragment使用的时候，常常有实现下面的效果：
-
-常见的实现方式有：
-
-Fragment + ActionBar(5.0弃用，改为TabLayout)
-Android Support library的TabLayout
-第三方的库
-
-常见的第三方的库：
-
-
-ViewPagerIndicator
-SmartTabLayout
-PagerSli">
-<meta property="og:image" content="http://1.avatarinfo.sinaapp.com/pic/5.gif">
-<meta property="og:image" content="http://1.avatarinfo.sinaapp.com/pic/6.gif">
-<meta property="og:image" content="http://1.avatarinfo.sinaapp.com/pic/7.gif">
-<meta property="og:image" content="http://1.avatarinfo.sinaapp.com/pic/8.gif">
-<meta property="og:image" content="http://1.avatarinfo.sinaapp.com/pic/9.gif">
-<meta property="og:image" content="http://1.avatarinfo.sinaapp.com/pic/10.gif">
-<meta property="og:image" content="http://1.avatarinfo.sinaapp.com/pic/11.gif">
-<meta property="og:updated_time" content="2015-08-02T08:22:18.474Z">
+<meta property="og:description" content="今天在Android Studio中导入项目的时候，遇到下面的一个问题：Error:SSL peer shut down incorrectly
+解决方案：">
+<meta property="og:image" content="http://7xljei.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20151215164633.png">
+<meta property="og:updated_time" content="2015-12-15T13:30:57.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A summary of sliding tab of ViewPager with Fragment">
-<meta name="twitter:description" content="复习Fragment的一点总结，ViewPager结合Fragment使用的时候，常常有实现下面的效果：
-
-常见的实现方式有：
-
-Fragment + ActionBar(5.0弃用，改为TabLayout)
-Android Support library的TabLayout
-第三方的库
-
-常见的第三方的库：
-
-
-ViewPagerIndicator
-SmartTabLayout
-PagerSli">
+<meta name="twitter:title" content="Error:SSL peer shut down incorrectly">
+<meta name="twitter:description" content="今天在Android Studio中导入项目的时候，遇到下面的一个问题：Error:SSL peer shut down incorrectly
+解决方案：">
 
     
     <link rel="alternative" href="/atom.xml" title="louis.chen" type="application/atom+xml">
@@ -130,14 +88,14 @@ PagerSli">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/02/A-summary-of-sliding-tab-of-ViewPager-with-Fragment/" title="A summary of sliding tab of ViewPager with Fragment" itemprop="url">A summary of sliding tab of ViewPager with Fragment</a>
+      <a href="/2015/12/15/Error-SSL-peer-shut-down-incorrectly/" title="Error:SSL peer shut down incorrectly" itemprop="url">Error:SSL peer shut down incorrectly</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-02T08:13:37.000Z" itemprop="datePublished"> 发表于 2015-08-02</time>
+    <time datetime="2015-12-15T13:30:33.000Z" itemprop="datePublished"> 发表于 2015-12-15</time>
     
   </p>
 </header>
@@ -150,22 +108,9 @@ PagerSli">
 		
 		</div>
 		
-		<p>复习Fragment的一点总结，ViewPager结合Fragment使用的时候，常常有实现下面的效果：</p>
-<p><img src="http://1.avatarinfo.sinaapp.com/pic/5.gif" alt="1"><br><img src="http://1.avatarinfo.sinaapp.com/pic/6.gif" alt="2"><br><img src="http://1.avatarinfo.sinaapp.com/pic/7.gif" alt="3"><br><img src="http://1.avatarinfo.sinaapp.com/pic/8.gif" alt="4"><br><img src="http://1.avatarinfo.sinaapp.com/pic/9.gif" alt="5"><br><img src="http://1.avatarinfo.sinaapp.com/pic/10.gif" alt="6"><br><img src="http://1.avatarinfo.sinaapp.com/pic/11.gif" alt="7"></p>
-<p>常见的实现方式有：</p>
-<ul>
-<li>Fragment + ActionBar(5.0弃用，改为TabLayout)</li>
-<li>Android Support library的TabLayout</li>
-<li>第三方的库</li>
-</ul>
-<p>常见的第三方的库：</p>
-<blockquote>
-<ul>
-<li><a href="https://github.com/JakeWharton/ViewPagerIndicator" target="_blank" rel="external">ViewPagerIndicator</a></li>
-<li><a href="https://github.com/ogaclejapan/SmartTabLayout" target="_blank" rel="external">SmartTabLayout</a></li>
-<li><a href="https://github.com/astuetz/PagerSlidingTabStrip" target="_blank" rel="external">PagerSlidingTabStrip</a></li>
-</ul>
-</blockquote>
+		<p>今天在Android Studio中导入项目的时候，遇到下面的一个问题：<br><code>Error:SSL peer shut down incorrectly</code></p>
+<p>解决方案：</p>
+<p><img src="http://7xljei.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20151215164633.png" alt="解决方案"></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -188,7 +133,7 @@ PagerSli">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenfuduo.me/2015/08/02/A-summary-of-sliding-tab-of-ViewPager-with-Fragment/" data-title="A summary of sliding tab of ViewPager with Fragment | louis.chen" data-tsina="2338582935" class="share clearfix">
+	  <div data-url="http://chenfuduo.me/2015/12/15/Error-SSL-peer-shut-down-incorrectly/" data-title="Error:SSL peer shut down incorrectly | louis.chen" data-tsina="2338582935" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -201,19 +146,11 @@ PagerSli">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/08/02/Fragment-Navigation-Drawer/" title="Fragment Navigation Drawer">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Fragment Navigation Drawer</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/08/02/Using-DialogFragment/"  title="Using DialogFragment">
+<a href="/2015/12/15/应用商城的整体架构/"  title="应用商城的整体架构">
  <strong>下一篇：</strong><br/> 
- <span>Using DialogFragment
+ <span>应用商城的整体架构
 </span>
 </a>
 </div>
@@ -222,7 +159,7 @@ PagerSli">
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/08/02/A-summary-of-sliding-tab-of-ViewPager-with-Fragment/" data-title="A summary of sliding tab of ViewPager with Fragment" data-url="http://chenfuduo.me/2015/08/02/A-summary-of-sliding-tab-of-ViewPager-with-Fragment/"></div>
+	<div class="ds-thread" data-thread-key="2015/12/15/Error-SSL-peer-shut-down-incorrectly/" data-title="Error:SSL peer shut down incorrectly" data-url="http://chenfuduo.me/2015/12/15/Error-SSL-peer-shut-down-incorrectly/"></div>
 </section>
 
 
