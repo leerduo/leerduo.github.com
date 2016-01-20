@@ -1,17 +1,63 @@
+<!doctype html>
 
- <!DOCTYPE HTML>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
+
+
   
-    <title>下拉刷新 | louis.chen</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="louis.chen">
-    
 
-    
-    <meta name="description" content="下拉刷新在很多应用中都可以看到，可以自己实现，也可以使用V4包下的SwipeRefreshLayout，或者使用第三方的开源控件，比如：android-Ultra-Pull-To-Refresh
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="移动开发," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="下拉刷新在很多应用中都可以看到，可以自己实现，也可以使用V4包下的SwipeRefreshLayout，或者使用第三方的开源控件，比如：android-Ultra-Pull-To-Refresh
 。本篇是使用V4包下的SwipeRefreshLayout实现。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="下拉刷新">
@@ -26,89 +72,227 @@
 <meta name="twitter:description" content="下拉刷新在很多应用中都可以看到，可以自己实现，也可以使用V4包下的SwipeRefreshLayout，或者使用第三方的开源控件，比如：android-Ultra-Pull-To-Refresh
 。本篇是使用V4包下的SwipeRefreshLayout实现。">
 
-    
-    <link rel="alternative" href="/atom.xml" title="louis.chen" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/jacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 下拉刷新 | louis.chen </title>
 </head>
 
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="louis.chen" title="louis.chen"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="louis.chen">louis.chen</a></h1>
-				<h2 class="blog-motto">纸上得来终觉浅,绝知此事要躬行。</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/forever">小永远</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/project">项目</a></li>
-					
-						<li><a href="/about">资源</a></li>
-					
-					<li>
- 					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:chenfuduo.me">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
   
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?63c029dba1e367df2c8ffa39a309056a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
     
-      <a href="/2015/09/03/下拉刷新/" title="下拉刷新" itemprop="url">下拉刷新</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
-		
-  <p class="article-time">
-    <time datetime="2015-09-03T09:18:30.000Z" itemprop="datePublished"> 发表于 2015-09-03</time>
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">louis.chen</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">纸上得来终觉浅,绝知此事要躬行。</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
-  </p>
-</header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#总揽"><span class="toc-number">1.</span> <span class="toc-text">总揽</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#colors-xml"><span class="toc-number">3.1.</span> <span class="toc-text">colors.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建包bean、Activity、adapter、app"><span class="toc-number">3.2.</span> <span class="toc-text">建包bean、Activity、adapter、app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MyApplication"><span class="toc-number">3.3.</span> <span class="toc-text">MyApplication</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条目的布局list_row-xml"><span class="toc-number">3.4.</span> <span class="toc-text">条目的布局list_row.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实体类Movie-java"><span class="toc-number">3.5.</span> <span class="toc-text">实体类Movie.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#适配器类"><span class="toc-number">3.6.</span> <span class="toc-text">适配器类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主布局"><span class="toc-number">3.7.</span> <span class="toc-text">主布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑代码"><span class="toc-number">3.8.</span> <span class="toc-text">逻辑代码</span></a></li></ol></li></ol>
-		
-		</div>
-		
-		<p><img src="http://7xljei.com1.z0.glb.clouddn.com/19.gif" alt="效果图"></p>
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                下拉刷新
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-09-03T17:18:30+08:00" content="2015-09-03">
+              2015-09-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/移动开发/" itemprop="url" rel="index">
+                    <span itemprop="name">移动开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/03/下拉刷新/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/03/下拉刷新/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7xljei.com1.z0.glb.clouddn.com/19.gif" alt="效果图"></p>
 <p>下拉刷新在很多应用中都可以看到，可以自己实现，也可以使用V4包下的<code>SwipeRefreshLayout</code>，或者使用第三方的开源控件，比如：<a href="https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh" target="_blank" rel="external">android-Ultra-Pull-To-Refresh
 </a>。本篇是使用V4包下的<code>SwipeRefreshLayout</code>实现。</p>
 <a id="more"></a>
@@ -134,427 +318,459 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.chenfuduo.swiperefreshdemo.activity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.support.v4.widget.SwipeRefreshLayout;</span><br><span class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"><span class="keyword">import</span> android.view.Menu;</span><br><span class="line"><span class="keyword">import</span> android.view.MenuItem;</span><br><span class="line"><span class="keyword">import</span> android.widget.ListView;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.android.volley.Response;</span><br><span class="line"><span class="keyword">import</span> com.android.volley.VolleyError;</span><br><span class="line"><span class="keyword">import</span> com.android.volley.toolbox.JsonArrayRequest;</span><br><span class="line"><span class="keyword">import</span> com.example.chenfuduo.swiperefreshdemo.R;</span><br><span class="line"><span class="keyword">import</span> com.example.chenfuduo.swiperefreshdemo.adapter.SwipeListAdapter;</span><br><span class="line"><span class="keyword">import</span> com.example.chenfuduo.swiperefreshdemo.app.MyApplication;</span><br><span class="line"><span class="keyword">import</span> com.example.chenfuduo.swiperefreshdemo.bean.Movie;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.json.JSONArray;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONException;</span><br><span class="line"><span class="keyword">import</span> org.json.JSONObject;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">SwipeRefreshLayout</span>.<span class="title">OnRefreshListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String TAG = MainActivity.class.getSimpleName();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String URL_TOP_250 = <span class="string">"http://api.androidhive.info/json/imdb_top_250.php?offset="</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> SwipeRefreshLayout swipeRefreshLayout;</span><br><span class="line">    <span class="keyword">private</span> ListView listView;</span><br><span class="line">    <span class="keyword">private</span> SwipeListAdapter adapter;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Movie&gt; movieList;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// initially offset will be 0, later will be updated while parsing the json</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> offSet = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        listView = (ListView) findViewById(R.id.listView);</span><br><span class="line">        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);</span><br><span class="line"></span><br><span class="line">        movieList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        adapter = <span class="keyword">new</span> SwipeListAdapter(<span class="keyword">this</span>, movieList);</span><br><span class="line">        listView.setAdapter(adapter);</span><br><span class="line"></span><br><span class="line">        swipeRefreshLayout.setOnRefreshListener(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span><br><span class="line">         * Showing Swipe Refresh animation on activity create</span><br><span class="line">         * As animation won't start on onCreate, post runnable is used</span><br><span class="line">         */</span></span><br><span class="line">        swipeRefreshLayout.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">                                    <span class="annotation">@Override</span></span><br><span class="line">                                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                                        swipeRefreshLayout.setRefreshing(<span class="keyword">true</span>);</span><br><span class="line">                                        fetchMovies();</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreateOptionsMenu</span><span class="params">(Menu menu)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Inflate the menu; this adds items to the action bar if it is present.</span></span><br><span class="line">        getMenuInflater().inflate(R.menu.menu_main, menu);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onOptionsItemSelected</span><span class="params">(MenuItem item)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Handle action bar item clicks here. The action bar will</span></span><br><span class="line">        <span class="comment">// automatically handle clicks on the Home/Up button, so long</span></span><br><span class="line">        <span class="comment">// as you specify a parent activity in AndroidManifest.xml.</span></span><br><span class="line">        <span class="keyword">int</span> id = item.getItemId();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//noinspection SimplifiableIfStatement</span></span><br><span class="line">        <span class="keyword">if</span> (id == R.id.action_settings) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (id == R.id.item_refresh)&#123;</span><br><span class="line">            fetchMovies();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onOptionsItemSelected(item);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRefresh</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        fetchMovies();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * Fetching movies json by making http call</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">fetchMovies</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// showing refresh animation before making http call</span></span><br><span class="line">        swipeRefreshLayout.setRefreshing(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// appending offset to url</span></span><br><span class="line">        String url = URL_TOP_250 + offSet;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Volley's json array request object</span></span><br><span class="line">        JsonArrayRequest req = <span class="keyword">new</span> JsonArrayRequest(url,</span><br><span class="line">                <span class="keyword">new</span> Response.Listener&lt;JSONArray&gt;() &#123;</span><br><span class="line">                    <span class="annotation">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResponse</span><span class="params">(JSONArray response)</span> </span>&#123;</span><br><span class="line">                        Log.d(TAG, response.toString());</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">if</span> (response.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">                            <span class="comment">// looping through json and adding to movies list</span></span><br><span class="line">                            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; response.length(); i++) &#123;</span><br><span class="line">                                <span class="keyword">try</span> &#123;</span><br><span class="line">                                    JSONObject movieObj = response.getJSONObject(i);</span><br><span class="line"></span><br><span class="line">                                    <span class="keyword">int</span> rank = movieObj.getInt(<span class="string">"rank"</span>);</span><br><span class="line">                                    String title = movieObj.getString(<span class="string">"title"</span>);</span><br><span class="line"></span><br><span class="line">                                    Movie m = <span class="keyword">new</span> Movie(rank, title);</span><br><span class="line"></span><br><span class="line">                                    movieList.add(<span class="number">0</span>, m);</span><br><span class="line"></span><br><span class="line">                                    <span class="comment">// updating offset value to highest value</span></span><br><span class="line">                                    <span class="keyword">if</span> (rank &gt;= offSet)</span><br><span class="line">                                        offSet = rank;</span><br><span class="line"></span><br><span class="line">                                &#125; <span class="keyword">catch</span> (JSONException e) &#123;</span><br><span class="line">                                    Log.e(TAG, <span class="string">"JSON Parsing error: "</span> + e.getMessage());</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            adapter.notifyDataSetChanged();</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                        <span class="comment">// stopping swipe refresh</span></span><br><span class="line">                        swipeRefreshLayout.setRefreshing(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, <span class="keyword">new</span> Response.ErrorListener() &#123;</span><br><span class="line">            <span class="annotation">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onErrorResponse</span><span class="params">(VolleyError error)</span> </span>&#123;</span><br><span class="line">                Log.e(TAG, <span class="string">"Server Error: "</span> + error.getMessage());</span><br><span class="line"></span><br><span class="line">                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();</span><br><span class="line"></span><br><span class="line">                <span class="comment">// stopping swipe refresh</span></span><br><span class="line">                swipeRefreshLayout.setRefreshing(<span class="keyword">false</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Adding request to request queue</span></span><br><span class="line">        MyApplication.getInstance().addToRequestQueue(req);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>补充一点：php生成json的代码：<br><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">// sleep for 2 sec show that the androd swipe refresh will be visible for sometime</span></span><br><span class="line">sleep(<span class="number">2</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// all top 250 movies</span></span><br><span class="line"><span class="variable">$movies</span> = <span class="keyword">array</span>(<span class="string">"The Shawshank Redemption"</span>, <span class="string">"The Godfather"</span>, <span class="string">"The Godfather: Part II"</span>, <span class="string">"The Dark Knight"</span>, <span class="string">"Pulp Fiction"</span>, <span class="string">"Schindler's List"</span>, <span class="string">"12 Angry Men"</span>, <span class="string">"The Good, the Bad and the Ugly"</span>, <span class="string">"The Lord of the Rings: The Return of the King"</span>, <span class="string">"Fight Club"</span>, <span class="string">"The Lord of the Rings: The Fellowship of the Ring"</span>, <span class="string">"Star Wars: Episode V - The Empire Strikes Back"</span>, <span class="string">"Forrest Gump"</span>, <span class="string">"Inception"</span>, <span class="string">"One Flew Over the Cuckoo's Nest"</span>, <span class="string">"The Lord of the Rings: The Two Towers"</span>, <span class="string">"Goodfellas"</span>, <span class="string">"The Matrix"</span>, <span class="string">"Star Wars"</span>, <span class="string">"Seven Samurai"</span>, <span class="string">"City of God"</span>, <span class="string">"Se7en"</span>, <span class="string">"The Usual Suspects"</span>, <span class="string">"The Silence of the Lambs"</span>, <span class="string">"It's a Wonderful Life"</span>, <span class="string">"Interstellar"</span>, <span class="string">"Léon: The Professional"</span>, <span class="string">"Life Is Beautiful"</span>, <span class="string">"Once Upon a Time in the West"</span>, <span class="string">"Casablanca"</span>, <span class="string">"American History X"</span>, <span class="string">"Saving Private Ryan"</span>, <span class="string">"Spirited Away"</span>, <span class="string">"Raiders of the Lost Ark"</span>, <span class="string">"City Lights"</span>, <span class="string">"Psycho"</span>, <span class="string">"Rear Window"</span>, <span class="string">"The Intouchables"</span>, <span class="string">"Whiplash"</span>, <span class="string">"Modern Times"</span>, <span class="string">"The Green Mile"</span>, <span class="string">"Terminator 2: Judgment Day"</span>, <span class="string">"Memento"</span>, <span class="string">"The Pianist"</span>, <span class="string">"The Departed"</span>, <span class="string">"Apocalypse Now"</span>, <span class="string">"Gladiator"</span>, <span class="string">"Sunset Blvd."</span>, <span class="string">"Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb"</span>, <span class="string">"Back to the Future"</span>, <span class="string">"Alien"</span>, <span class="string">"The Prestige"</span>, <span class="string">"The Lion King"</span>, <span class="string">"The Great Dictator"</span>, <span class="string">"The Lives of Others"</span>, <span class="string">"Cinema Paradiso"</span>, <span class="string">"Django Unchained"</span>, <span class="string">"The Shining"</span>, <span class="string">"Paths of Glory"</span>, <span class="string">"The Dark Knight Rises"</span>, <span class="string">"American Beauty"</span>, <span class="string">"WALL·E"</span>, <span class="string">"North by Northwest"</span>, <span class="string">"Aliens"</span>, <span class="string">"Citizen Kane"</span>, <span class="string">"Grave of the Fireflies"</span>, <span class="string">"Vertigo"</span>, <span class="string">"M"</span>, <span class="string">"Oldboy"</span>, <span class="string">"Das Boot"</span>, <span class="string">"Amélie"</span>, <span class="string">"Princess Mononoke"</span>, <span class="string">"Star Wars: Episode VI - Return of the Jedi"</span>, <span class="string">"Once Upon a Time in America"</span>, <span class="string">"Toy Story 3"</span>, <span class="string">"Reservoir Dogs"</span>, <span class="string">"A Clockwork Orange"</span>, <span class="string">"Braveheart"</span>, <span class="string">"Taxi Driver"</span>, <span class="string">"Double Indemnity"</span>, <span class="string">"Witness for the Prosecution"</span>, <span class="string">"Requiem for a Dream"</span>, <span class="string">"To Kill a Mockingbird"</span>, <span class="string">"Lawrence of Arabia"</span>, <span class="string">"Eternal Sunshine of the Spotless Mind"</span>, <span class="string">"Full Metal Jacket"</span>, <span class="string">"Bicycle Thieves"</span>, <span class="string">"The Sting"</span>, <span class="string">"Singin' in the Rain"</span>, <span class="string">"Amadeus"</span>, <span class="string">"Monty Python and the Holy Grail"</span>, <span class="string">"Snatch."</span>, <span class="string">"2001: A Space Odyssey"</span>, <span class="string">"For a Few Dollars More"</span>, <span class="string">"Rashomon"</span>, <span class="string">"L.A. Confidential"</span>, <span class="string">"The Kid"</span>, <span class="string">"All About Eve"</span>, <span class="string">"The Apartment"</span>, <span class="string">"Inglourious Basterds"</span>, <span class="string">"Toy Story"</span>, <span class="string">"The Treasure of the Sierra Madre"</span>, <span class="string">"A Separation"</span>, <span class="string">"Indiana Jones and the Last Crusade"</span>, <span class="string">"Yojimbo"</span>, <span class="string">"The Third Man"</span>, <span class="string">"Some Like It Hot"</span>, <span class="string">"Metropolis"</span>, <span class="string">"Batman Begins"</span>, <span class="string">"Unforgiven"</span>, <span class="string">"Scarface"</span>, <span class="string">"Like Stars on Earth"</span>, <span class="string">"Raging Bull"</span>, <span class="string">"Up"</span>, <span class="string">"3 Idiots"</span>, <span class="string">"Downfall"</span>, <span class="string">"Chinatown"</span>, <span class="string">"The Great Escape"</span>, <span class="string">"Die Hard"</span>, <span class="string">"The Hunt"</span>, <span class="string">"On the Waterfront"</span>, <span class="string">"Heat"</span>, <span class="string">"Mr. Smith Goes to Washington"</span>, <span class="string">"Pan's Labyrinth"</span>, <span class="string">"Good Will Hunting"</span>, <span class="string">"The Bridge on the River Kwai"</span>, <span class="string">"My Neighbor Totoro"</span>, <span class="string">"Ikiru"</span>, <span class="string">"The Seventh Seal"</span>, <span class="string">"The Gold Rush"</span>, <span class="string">"Ran"</span>, <span class="string">"Wild Strawberries"</span>, <span class="string">"The General"</span>, <span class="string">"Blade Runner"</span>, <span class="string">"The Elephant Man"</span>, <span class="string">"Lock, Stock and Two Smoking Barrels"</span>, <span class="string">"The Secret in Their Eyes"</span>, <span class="string">"The Wolf of Wall Street"</span>, <span class="string">"Casino"</span>, <span class="string">"Gran Torino"</span>, <span class="string">"Howl's Moving Castle"</span>, <span class="string">"Warrior"</span>, <span class="string">"The Big Lebowski"</span>, <span class="string">"V for Vendetta"</span>, <span class="string">"Rebecca"</span>, <span class="string">"The Bandit"</span>, <span class="string">"Gone Girl"</span>, <span class="string">"The Deer Hunter"</span>, <span class="string">"Judgment at Nuremberg"</span>, <span class="string">"Cool Hand Luke"</span>, <span class="string">"How to Train Your Dragon"</span>, <span class="string">"It Happened One Night"</span>, <span class="string">"Fargo"</span>, <span class="string">"A Beautiful Mind"</span>, <span class="string">"Gone with the Wind"</span>, <span class="string">"Trainspotting"</span>, <span class="string">"Into the Wild"</span>, <span class="string">"Rush"</span>, <span class="string">"Dial M for Murder"</span>, <span class="string">"The Maltese Falcon"</span>, <span class="string">"The Sixth Sense"</span>, <span class="string">"Mary and Max"</span>, <span class="string">"Finding Nemo"</span>, <span class="string">"The Thing"</span>, <span class="string">"The Wages of Fear"</span>, <span class="string">"Hotel Rwanda"</span>, <span class="string">"No Country for Old Men"</span>, <span class="string">"Incendies"</span>, <span class="string">"Rang De Basanti"</span>, <span class="string">"Kill Bill: Vol. 1"</span>, <span class="string">"Platoon"</span>, <span class="string">"Life of Brian"</span>, <span class="string">"Butch Cassidy and the Sundance Kid"</span>, <span class="string">"Network"</span>, <span class="string">"A Wednesday"</span>, <span class="string">"Munna Bhai M.B.B.S."</span>, <span class="string">"Touch of Evil"</span>, <span class="string">"There Will Be Blood"</span>, <span class="string">"12 Years a Slave"</span>, <span class="string">"Annie Hall"</span>, <span class="string">"The 400 Blows"</span>, <span class="string">"Stand by Me"</span>, <span class="string">"The Princess Bride"</span>, <span class="string">"Persona"</span>, <span class="string">"The Grand Budapest Hotel"</span>, <span class="string">"Amores Perros"</span>, <span class="string">"Ben-Hur"</span>, <span class="string">"Diabolique"</span>, <span class="string">"In the Name of the Father"</span>, <span class="string">"The Grapes of Wrath"</span>, <span class="string">"Million Dollar Baby"</span>, <span class="string">"Sin City"</span>, <span class="string">"Hachi: A Dog's Tale"</span>, <span class="string">"Nausicaä of the Valley of the Wind"</span>, <span class="string">"The Wizard of Oz"</span>, <span class="string">"The Best Years of Our Lives"</span>, <span class="string">"Gandhi"</span>, <span class="string">"The Avengers"</span>, <span class="string">"The Bourne Ultimatum"</span>, <span class="string">"Donnie Darko"</span>, <span class="string">"Shutter Island"</span>, <span class="string">"Stalker"</span>, <span class="string">"8½"</span>, <span class="string">"Guardians of the Galaxy"</span>, <span class="string">"Strangers on a Train"</span>, <span class="string">"Infernal Affairs"</span>, <span class="string">"Twelve Monkeys"</span>, <span class="string">"Fanny and Alexander"</span>, <span class="string">"Before Sunrise"</span>, <span class="string">"Boyhood"</span>, <span class="string">"Jaws"</span>, <span class="string">"The Imitation Game"</span>, <span class="string">"The Battle of Algiers"</span>, <span class="string">"The Terminator"</span>, <span class="string">"High Noon"</span>, <span class="string">"Groundhog Day"</span>, <span class="string">"Harry Potter and the Deathly Hallows: Part 2"</span>, <span class="string">"Memories of Murder"</span>, <span class="string">"The King's Speech"</span>, <span class="string">"Ip Man"</span>, <span class="string">"Monsters, Inc."</span>, <span class="string">"Notorious"</span>, <span class="string">"Rocky"</span>, <span class="string">"Dog Day Afternoon"</span>, <span class="string">"Barry Lyndon"</span>, <span class="string">"La Haine"</span>, <span class="string">"The Truman Show"</span>, <span class="string">"Who's Afraid of Virginia Woolf?"</span>, <span class="string">"A Fistful of Dollars"</span>, <span class="string">"Dil Chahta Hai"</span>, <span class="string">"The Night of the Hunter"</span>, <span class="string">"Pirates of the Caribbean: The Curse of the Black Pearl"</span>, <span class="string">"Lagaan: Once Upon a Time in India"</span>, <span class="string">"Castle in the Sky"</span>, <span class="string">"Jurassic Park"</span>, <span class="string">"X-Men: Days of Future Past"</span>, <span class="string">"La Strada"</span>, <span class="string">"The Help"</span>, <span class="string">"Roman Holiday"</span>, <span class="string">"Wild Tales"</span>, <span class="string">"The Big Sleep"</span>, <span class="string">"Spring, Summer, Fall, Winter... and Spring"</span>, <span class="string">"Le Samouraï"</span>, <span class="string">"Prisoners"</span>, <span class="string">"Underground"</span>, <span class="string">"The Graduate"</span>, <span class="string">"Paris, Texas"</span>, <span class="string">"Solaris"</span>, <span class="string">"Three Colors: Red"</span>, <span class="string">"Papillon"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// reading offset from get parameter</span></span><br><span class="line"><span class="variable">$offset</span> = <span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">'offset'</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">'offset'</span>] != <span class="string">''</span> ? <span class="variable">$_GET</span>[<span class="string">'offset'</span>] : <span class="number">0</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// page limit</span></span><br><span class="line"><span class="variable">$limit</span> = <span class="number">20</span>;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="variable">$movies_array</span> = <span class="keyword">array</span>();</span><br><span class="line"> </span><br><span class="line"><span class="comment">// loop through page movies</span></span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$j</span> = <span class="variable">$offset</span>; <span class="variable">$j</span> &lt; <span class="variable">$offset</span> + <span class="variable">$limit</span> &amp;&amp; <span class="variable">$j</span> &lt; sizeof(<span class="variable">$movies</span>); <span class="variable">$j</span>++) &#123;</span><br><span class="line">    <span class="variable">$tmp</span> = <span class="keyword">array</span>();</span><br><span class="line">    <span class="variable">$tmp</span>[<span class="string">'rank'</span>] = <span class="variable">$j</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="variable">$tmp</span>[<span class="string">'title'</span>] = <span class="variable">$movies</span>[<span class="variable">$j</span>];</span><br><span class="line"> </span><br><span class="line">    array_push(<span class="variable">$movies_array</span>, <span class="variable">$tmp</span>);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// printing json response</span></span><br><span class="line"><span class="keyword">echo</span> json_encode(<span class="variable">$movies_array</span>);</span><br><span class="line"><span class="preprocessor">?&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>代码我会传到<a href="https://github.com/leerduo/MyExerciseDemo" target="_blank" rel="external">这里</a></p>
-  
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
 
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/移动开发/">移动开发</a>
-  </div>
-
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://chenfuduo.me/2015/09/03/下拉刷新/" data-title="下拉刷新 | louis.chen" data-tsina="2338582935" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2015/09/07/Android启动流程源码分析/" title="Android启动流程源码分析">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Android启动流程源码分析</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2015/08/29/遇到的问题/"  title="遇到的问题">
- <strong>下一篇：</strong><br/> 
- <span>遇到的问题
-</span>
-</a>
-</div>
-
-</nav>
-
-	
-<section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/09/03/下拉刷新/" data-title="下拉刷新" data-url="http://chenfuduo.me/2015/09/03/下拉刷新/"></div>
-</section>
-
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#总揽"><span class="toc-number">1.</span> <span class="toc-text">总揽</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#colors-xml"><span class="toc-number">3.1.</span> <span class="toc-text">colors.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建包bean、Activity、adapter、app"><span class="toc-number">3.2.</span> <span class="toc-text">建包bean、Activity、adapter、app</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MyApplication"><span class="toc-number">3.3.</span> <span class="toc-text">MyApplication</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条目的布局list_row-xml"><span class="toc-number">3.4.</span> <span class="toc-text">条目的布局list_row.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实体类Movie-java"><span class="toc-number">3.5.</span> <span class="toc-text">实体类Movie.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#适配器类"><span class="toc-number">3.6.</span> <span class="toc-text">适配器类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主布局"><span class="toc-number">3.7.</span> <span class="toc-text">主布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑代码"><span class="toc-number">3.8.</span> <span class="toc-text">逻辑代码</span></a></li></ol></li></ol>
- 
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/Python学习/" title="Python学习">Python学习<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/收藏/" title="收藏">收藏<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/机器学习/" title="机器学习">机器学习<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/移动开发/" title="移动开发">移动开发<sup>66</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>2</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/风景/" title="风景">风景<sup>1</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/移动开发/" title="移动开发">移动开发<sup>66</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Python学习/" title="Python学习">Python学习<sup>5</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/UI-UE/" title="UI/UE">UI/UE<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Design-Support-Library/" title="Design Support Library">Design Support Library<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/自定义View/" title="自定义View">自定义View<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/自定义控件/" title="自定义控件">自定义控件<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ViewDragHelper/" title="ViewDragHelper">ViewDragHelper<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/风景/" title="风景">风景<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/EventBus/" title="EventBus">EventBus<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Bundle/" title="Bundle">Bundle<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.vogella.com/tutorials/android.html" target="_blank" title="Vogella">Vogella</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-  <div class="weiboshow">
-  <p class="asidetitle">新浪微博</p>
-    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2338582935&verifier=59b78413&dpc=1"></iframe>
-</div>
-
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> louis.chen,student of USTC,Focus on mobile develop. <br/>
-			It is my amibition to make beautiful apps.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		<a href="http://weibo.com/2338582935" target="_blank" class="icon-weibo" title="微博"></a>
-		
-		
-		<a href="https://github.com/leerduo" target="_blank" class="icon-github" title="github"></a>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	</div>
-			
-		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
-		
-		<a href="/about" target="_blank" title="louis.chen">louis.chen</a>
-		
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-        getSize();
-        if (myWidth >= 1024) {
-          c.click();
-        }
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
       
-      $('#toc.toc-aside').css('display', 'none');
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/移动开发/" rel="tag">#移动开发</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/29/遇到的问题/" rel="next" title="遇到的问题">
+                <i class="fa fa-chevron-left"></i> 遇到的问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/07/Android启动流程源码分析/" rel="prev" title="Android启动流程源码分析">
+                Android启动流程源码分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/09/03/下拉刷新/"
+           data-title="下拉刷新" data-url="http://chenfuduo.me/2015/09/03/下拉刷新/">
+      </div>
+    
+  </div>
+
+
+        </div>
         
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://duoinfo.sinaapp.com/yiyou/files/avatar.png"
+               alt="louis.chen" />
+          <p class="site-author-name" itemprop="name">louis.chen</p>
+          <p class="site-description motion-element" itemprop="description">移动开发者,极端产品控。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">标签</span>
+              
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/leerduo" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/duoduoustc" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.vogella.com/tutorials/android.html" target="_blank">Vogella</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#总揽"><span class="nav-number">1.</span> <span class="nav-text">总揽</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#colors-xml"><span class="nav-number">3.1.</span> <span class="nav-text">colors.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建包bean、Activity、adapter、app"><span class="nav-number">3.2.</span> <span class="nav-text">建包bean、Activity、adapter、app</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyApplication"><span class="nav-number">3.3.</span> <span class="nav-text">MyApplication</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条目的布局list_row-xml"><span class="nav-number">3.4.</span> <span class="nav-text">条目的布局list_row.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实体类Movie-java"><span class="nav-number">3.5.</span> <span class="nav-text">实体类Movie.java</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适配器类"><span class="nav-number">3.6.</span> <span class="nav-text">适配器类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主布局"><span class="nav-number">3.7.</span> <span class="nav-text">主布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑代码"><span class="nav-number">3.8.</span> <span class="nav-text">逻辑代码</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">louis.chen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
     }
-  });
-});
-</script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
 
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
     });
-  });
-});     
-</script>
 
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"chenlouis"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
     });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
   });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
 </script>
 
 
 
-<!-- Analytics Begin -->
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F63c029dba1e367df2c8ffa39a309056a' type='text/javascript'%3E%3C/script%3E"));
-</script>
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"chenfuduo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
 
 
 
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
 
 
-<!-- MathJax End -->
+  
+  
 
-<!-- Tiny_search Begin -->
+  
+  
 
-<!-- Tiny_search End -->
 
-  </body>
+</body>
 </html>
