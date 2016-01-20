@@ -1,0 +1,576 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Python深入上 | louis.chen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="louis.chen">
+    
+
+    
+    <meta name="description" content="Python深入上，包括特殊方法与多范式;上下文管理.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python深入上">
+<meta property="og:url" content="http://chenfuduo.me/2015/11/03/Python深入上/index.html">
+<meta property="og:site_name" content="louis.chen">
+<meta property="og:description" content="Python深入上，包括特殊方法与多范式;上下文管理.">
+<meta property="og:updated_time" content="2015-11-03T12:49:16.119Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python深入上">
+<meta name="twitter:description" content="Python深入上，包括特殊方法与多范式;上下文管理.">
+
+    
+    <link rel="alternative" href="/atom.xml" title="louis.chen" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="louis.chen" title="louis.chen"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="louis.chen">louis.chen</a></h1>
+				<h2 class="blog-motto">纸上得来终觉浅,绝知此事要躬行。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/forever">小永远</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/project">项目</a></li>
+					
+						<li><a href="/about">资源</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chenfuduo.me">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/03/Python深入上/" title="Python深入上" itemprop="url">Python深入上</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-03T12:33:12.000Z" itemprop="datePublished"> 发表于 2015-11-03</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#特殊方法与多范式"><span class="toc-number">1.</span> <span class="toc-text">特殊方法与多范式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-number">1.1.</span> <span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置函数"><span class="toc-number">1.2.</span> <span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表（list）元素引用"><span class="toc-number">1.3.</span> <span class="toc-text">表（list）元素引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.4.</span> <span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#上下文管理器"><span class="toc-number">2.</span> <span class="toc-text">上下文管理器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭文件"><span class="toc-number">2.1.</span> <span class="toc-text">关闭文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义"><span class="toc-number">2.2.</span> <span class="toc-text">自定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的属性"><span class="toc-number">2.3.</span> <span class="toc-text">对象的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的dict系统"><span class="toc-number">2.4.</span> <span class="toc-text">属性的dict系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特性"><span class="toc-number">2.5.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用特殊方法getattr"><span class="toc-number">2.6.</span> <span class="toc-text">使用特殊方法getattr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#即时生成属性的其他方式"><span class="toc-number">2.7.</span> <span class="toc-text">即时生成属性的其他方式</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>Python深入上，包括特殊方法与多范式;上下文管理.</p>
+<a id="more"></a>
+<h1 id="特殊方法与多范式">特殊方法与多范式</h1><p>Python 一切皆对象，但同时，Python还是一个<code>多范式语言(multi-paradigm)</code>,你不仅可以使用面向对象的方式来编写程序，还可以用面向过程的方式来编写相同功能的程序(还有函数式、声明式等，我们暂不深入)。Python的多范式依赖于Python对象中的<code>特殊方法(special method)</code>。</p>
+<p>特殊方法名的前后各有两个下划线。特殊方法又被成为魔法方法(magic method)，定义了许多Python 语法和表达方式，正如我们在下面的例子中将要看到的。当对象中定义了特殊方法的时候，Python也会对它们有“特殊优待”。比如定义了<strong>init</strong>()方法的类，会在创建对象的时候自动执行<strong>init</strong>()方法中的操作。</p>
+<p>(可以通过dir()来查看对象所拥有的特殊方法，比如dir(1))。</p>
+<h2 id="运算符">运算符</h2><p>Python的运算符是通过调用对象的特殊方法实现的。比如：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'abc'</span> + <span class="string">'xyz'</span>               <span class="comment"># 连接字符串</span></span><br></pre></td></tr></table></figure></p>
+<p>实际执行了如下操作：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'abc'</span>.__add__(<span class="string">'xyz'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>所以，在Python中，两个对象是否能进行加法运算，首先就要看相应的对象是否有<strong>add</strong>()方法。一旦相应的对象有<strong>add</strong>()方法，即使这个对象从数学上不可加，我们都可以用加法的形式，来表达obj.<strong>add</strong>()所定义的操作。在Python中，运算符起到简化书写的功能，但它依靠特殊方法实现。</p>
+<p>Python不强制用户使用面向对象的编程方法。用户可以选择自己喜欢的使用方式(比如选择使用+符号，还是使用更加面向对象的<strong>add</strong>()方法)。特殊方法写起来总是要更费事一点。</p>
+<h2 id="内置函数">内置函数</h2><p>与运算符类似，许多内置函数也都是调用对象的特殊方法。比如：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">len([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])      <span class="comment"># 返回表中元素的总数</span></span><br></pre></td></tr></table></figure></p>
+<p>实际上做的是：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].__len__()</span><br></pre></td></tr></table></figure></p>
+<p>相对与<strong>len</strong>()，内置函数len()也起到了简化书写的作用。</p>
+<h2 id="表（list）元素引用">表（list）元素引用</h2><p>下面是我们常见的表元素引用方式：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">li = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">print(li[<span class="number">3</span>])</span><br></pre></td></tr></table></figure></p>
+<p>上面的程序运行到li[3]的时候，Python发现并理解[]符号，然后调用<strong>getitem</strong>()方法。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">li = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">print(li.__getitem__(<span class="number">3</span>))</span><br></pre></td></tr></table></figure></p>
+<h2 id="函数">函数</h2><p>我们已经说过，在Python中，函数也是一种对象。实际上，任何一个有<strong>call</strong>()特殊方法的对象都被当作是函数。比如下面的例子:<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SampleMore</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, a)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> a + <span class="number">5</span></span><br><span class="line"></span><br><span class="line">add = SampleMore()     <span class="comment"># A function object</span></span><br><span class="line">print(add(<span class="number">2</span>))          <span class="comment"># Call function    </span></span><br><span class="line">map(add, [<span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>])    <span class="comment"># Pass around function object</span></span><br></pre></td></tr></table></figure></p>
+<p>add为SampleMore类的一个对象，当被调用时，add执行加5的操作。add还可以作为函数对象，被传递给map()函数。</p>
+<p>当然，我们还可以使用更“优美”的方式，想想是什么。</p>
+<h1 id="上下文管理器">上下文管理器</h1><p>上下文管理器(context manager)是Python2.5开始支持的一种语法，用于规定某个对象的使用范围。一旦进入或者离开该使用范围，会有特殊操作被调用 (比如为对象分配或者释放内存)。它的语法形式是with…as…</p>
+<h2 id="关闭文件">关闭文件</h2><p>我们会进行这样的操作：打开文件，读写，关闭文件。程序员经常会忘记关闭文件。上下文管理器可以在不需要文件的时候，自动关闭文件。</p>
+<p>下面我们看一下两段程序：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># without context manager</span></span><br><span class="line">f = open(<span class="string">"new.txt"</span>, <span class="string">"w"</span>)</span><br><span class="line">print(f.closed)               <span class="comment"># whether the file is open</span></span><br><span class="line">f.write(<span class="string">"Hello World!"</span>)</span><br><span class="line">f.close()</span><br><span class="line">print(f.closed)</span><br></pre></td></tr></table></figure></p>
+<p>以及：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># with context manager</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"new.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> f:</span><br><span class="line">    print(f.closed)</span><br><span class="line">    f.write(<span class="string">"Hello World!"</span>)</span><br><span class="line">print(f.closed)</span><br></pre></td></tr></table></figure></p>
+<p>两段程序实际上执行的是相同的操作。我们的第二段程序就使用了上下文管理器 (with…as…)。上下文管理器有隶属于它的程序块。当隶属的程序块执行结束的时候(也就是不再缩进)，上下文管理器自动关闭了文件 (我们通过f.closed来查询文件是否关闭)。我们相当于使用缩进规定了文件对象f的使用范围。</p>
+<p>上面的上下文管理器基于f对象的<strong>exit</strong>()特殊方法(还记得我们如何利用特殊方法来实现各种语法？参看特殊方法与多范式)。当我们使用上下文管理器的语法时，我们实际上要求Python在进入程序块之前调用对象的<strong>enter</strong>()方法，在结束程序块的时候调用<strong>exit</strong>()方法。对于文件对象f来说，它定义了<strong>enter</strong>()和<strong>exit</strong>()方法(可以通过dir(f)看到)。在f的<strong>exit</strong>()方法中，有self.close()语句。所以在使用上下文管理器时，我们就不用明文关闭f文件了。</p>
+<h2 id="自定义">自定义</h2><p>任何定义了<strong>enter</strong>()和<strong>exit</strong>()方法的对象都可以用于上下文管理器。文件对象f是内置对象，所以f自动带有这两个特殊方法，不需要自定义。</p>
+<p>下面，我们自定义用于上下文管理器的对象，就是下面的myvow：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># customized object</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">VOW</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        self.text = text</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.text = <span class="string">"I say: "</span> + self.text    <span class="comment"># add prefix</span></span><br><span class="line">        <span class="keyword">return</span> self                          <span class="comment"># <span class="doctag">note:</span> return an object</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self,exc_type,exc_value,traceback)</span>:</span></span><br><span class="line">        self.text = self.text + <span class="string">"!"</span>          <span class="comment"># add suffix</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> VOW(<span class="string">"I'm fine"</span>) <span class="keyword">as</span> myvow:</span><br><span class="line">    print(myvow.text)</span><br><span class="line"></span><br><span class="line">print(myvow.text)</span><br></pre></td></tr></table></figure></p>
+<p>我们的运行结果如下:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I say: I&#39;m fine&#10;I say: I&#39;m fine!</span><br></pre></td></tr></table></figure></p>
+<p>我们可以看到，在进入上下文和离开上下文时，对象的text属性发生了改变(最初的text属性是”I’m fine”)。</p>
+<p><strong>enter</strong>()返回一个对象。上下文管理器会使用这一对象作为as所指的变量，也就是myvow。在<strong>enter</strong>()中，我们为myvow.text增加了前缀 (“I say: “)。在<strong>exit</strong>()中，我们为myvow.text增加了后缀(“!”)。</p>
+<p>注意: <strong>exit</strong>()中有四个参数。当程序块中出现异常(exception)，<strong>exit</strong>()的参数中exc_type, exc_value, traceback用于描述异常。我们可以根据这三个参数进行相应的处理。如果正常运行结束，这三个参数都是None。在我们的程序中，我们并没有用到这一特性。</p>
+<p>由于上下文管理器带来的便利，它是一个值得使用的工具。</p>
+<h2 id="对象的属性">对象的属性</h2><p>Python一切皆对象(object)，每个对象都可能有多个属性(attribute)。Python的属性有一套统一的管理方案。</p>
+<h2 id="属性的dict系统">属性的<strong>dict</strong>系统</h2><p>对象的属性可能来自于其类定义，叫做类属性(class attribute)。类属性可能来自类定义自身，也可能根据类定义继承来的。一个对象的属性还可能是该对象实例定义的，叫做对象属性(object attribute)。</p>
+<p>对象的属性储存在对象的<strong>dict</strong>属性中。<strong>dict</strong>为一个词典，键为属性名，对应的值为属性本身。我们看下面的类和对象。chicken类继承自bird类，而summer为chicken类的一个对象。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bird</span><span class="params">(object)</span>:</span></span><br><span class="line">    feather = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">chicken</span><span class="params">(bird)</span>:</span></span><br><span class="line">    fly = <span class="keyword">False</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, age)</span>:</span></span><br><span class="line">        self.age = age</span><br><span class="line"></span><br><span class="line">summer = chicken(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">print(bird.__dict__)</span><br><span class="line">print(chicken.__dict__)</span><br><span class="line">print(summer.__dict__)</span><br></pre></td></tr></table></figure></p>
+<p>下面为我们的输出结果：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;&#39;__dict__&#39;: &#60;attribute &#39;__dict__&#39; of &#39;bird&#39; objects&#62;, &#39;__module__&#39;: &#39;__main__&#39;, &#39;__weakref__&#39;: &#60;attribute &#39;__weakref__&#39; of &#39;bird&#39; objects&#62;, &#39;feather&#39;: True, &#39;__doc__&#39;: None&#125;&#10;&#10;&#10;&#123;&#39;fly&#39;: False, &#39;__module__&#39;: &#39;__main__&#39;, &#39;__doc__&#39;: None, &#39;__init__&#39;: &#60;function __init__ at 0x2b91db476d70&#62;&#125;&#10;&#10;&#10;&#123;&#39;age&#39;: 2&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第一行为bird类的属性，比如feather。第二行为chicken类的属性，比如fly和<strong>init</strong>方法。第三行为summer对象的属性，也就是age。有一些属性，比如<strong>doc</strong>，并不是由我们定义的，而是由Python自动生成。此外，bird类也有父类，是object类(正如我们的bird定义，class bird(object))。这个object类是Python中所有类的父类。</p>
+<p>可以看到，Python中的属性是分层定义的，比如这里分为object/bird/chicken/summer这四层。当我们需要调用某个属性的时候，Python会一层层向上遍历，直到找到那个属性。(某个属性可能出现再不同的层被重复定义，Python向上的过程中，会选取先遇到的那一个，也就是比较低层的属性定义)。</p>
+<p>当我们有一个summer对象的时候，分别查询summer对象、chicken类、bird类以及object类的属性，就可以知道summer对象所有的<strong>dict</strong>，就可以找到通过对象summer可以调用和修改的所有属性了。下面两种属性修改方法等效：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">summer.__dict__[<span class="string">'age'</span>] = <span class="number">3</span></span><br><span class="line">print(summer.__dict__[<span class="string">'age'</span>])</span><br><span class="line"></span><br><span class="line">summer.age = <span class="number">5</span></span><br><span class="line">print(summer.age)</span><br></pre></td></tr></table></figure></p>
+<p>(上面的情况中，我们已经知道了summer对象的类为chicken，而chicken类的父类为bird。如果只有一个对象，而不知道它的类以及其他信息的时候，我们可以利用<strong>class</strong>属性找到对象的类，然后调用类的<strong>base</strong>属性来查询父类) 。</p>
+<h2 id="特性">特性</h2><p>同一个对象的不同属性之间可能存在依赖关系。当某个属性被修改时，我们希望依赖于该属性的其他属性也同时变化。这时，我们不能通过<strong>dict</strong>的方式来静态的储存属性。Python提供了多种即时生成属性的方法。其中一种称为特性(property)。特性是特殊的属性。比如我们为chicken类增加一个特性adult。当对象的age超过1时，adult为True；否则为False：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bird</span><span class="params">(object)</span>:</span></span><br><span class="line">    feather = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">chicken</span><span class="params">(bird)</span>:</span></span><br><span class="line">    fly = <span class="keyword">False</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, age)</span>:</span></span><br><span class="line">        self.age = age</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getAdult</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.age &gt; <span class="number">1.0</span>: <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">else</span>: <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    adult = property(getAdult)   <span class="comment"># property is built-in</span></span><br><span class="line"></span><br><span class="line">summer = chicken(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">print(summer.adult)</span><br><span class="line">summer.age = <span class="number">0.5</span></span><br><span class="line">print(summer.adult)</span><br></pre></td></tr></table></figure></p>
+<p>特性使用内置函数property()来创建。property()最多可以加载四个参数。前三个参数为函数，分别用于处理查询特性、修改特性、删除特性。最后一个参数为特性的文档，可以为一个字符串，起说明作用。</p>
+<p>我们使用下面一个例子进一步说明:<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">num</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self.value = value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNeg</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> -self.value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setNeg</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        self.value = -value</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delNeg</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"value also deleted"</span>)</span><br><span class="line">        <span class="keyword">del</span> self.value</span><br><span class="line">    neg = property(getNeg, setNeg, delNeg, <span class="string">"I'm negative"</span>)</span><br><span class="line"></span><br><span class="line">x = num(<span class="number">1.1</span>)</span><br><span class="line">print(x.neg)</span><br><span class="line">x.neg = -<span class="number">22</span></span><br><span class="line">print(x.value)</span><br><span class="line">print(num.neg.__doc__)</span><br><span class="line"><span class="keyword">del</span> x.neg</span><br></pre></td></tr></table></figure></p>
+<p>上面的num为一个数字，而neg为一个特性，用来表示数字的负数。当一个数字确定的时候，它的负数总是确定的；而当我们修改一个数的负数时，它本身的值也应该变化。这两点由getNeg和setNeg来实现。而delNeg表示的是，如果删除特性neg，那么应该执行的操作是删除属性value。property()的最后一个参数(“I’m negative”)为特性negative的说明文档。</p>
+<h2 id="使用特殊方法getattr">使用特殊方法<strong>getattr</strong></h2><p>我们可以用<strong>getattr</strong>(self, name)来查询即时生成的属性。当我们查询一个属性时，如果通过<strong>dict</strong>方法无法找到该属性，那么Python会调用对象的<strong>getattr</strong>方法，来即时生成该属性。比如:<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bird</span><span class="params">(object)</span>:</span></span><br><span class="line">    feather = <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">chicken</span><span class="params">(bird)</span>:</span></span><br><span class="line">    fly = <span class="keyword">False</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, age)</span>:</span></span><br><span class="line">        self.age = age</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> name == <span class="string">'adult'</span>:</span><br><span class="line">            <span class="keyword">if</span> self.age &gt; <span class="number">1.0</span>: <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">            <span class="keyword">else</span>: <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span>: <span class="keyword">raise</span> AttributeError(name)</span><br><span class="line"></span><br><span class="line">summer = chicken(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">print(summer.adult)</span><br><span class="line">summer.age = <span class="number">0.5</span></span><br><span class="line">print(summer.adult)</span><br><span class="line"></span><br><span class="line">print(summer.male)</span><br></pre></td></tr></table></figure></p>
+<p>每个特性需要有自己的处理函数，而<strong>getattr</strong>可以将所有的即时生成属性放在同一个函数中处理。<strong>getattr</strong>可以根据函数名区别处理不同的属性。比如上面我们查询属性名male的时候，raise AttributeError。</p>
+<p>(Python中还有一个<strong>getattribute</strong>特殊方法，用于查询任意属性。<strong>getattr</strong>只能用来查询不在<strong>dict</strong>系统中的属性)<br><strong>setattr</strong>(self, name, value)和<strong>delattr</strong>(self, name)可用于修改和删除属性。它们的应用面更广，可用于任意属性。</p>
+<h2 id="即时生成属性的其他方式">即时生成属性的其他方式</h2><p>即时生成属性还可以使用其他的方式，比如descriptor ( descriptor类实际上是property()函数的底层，property()实际上创建了一个该类的对象 ) 。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Python学习/">Python学习</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Python学习/">Python学习</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://chenfuduo.me/2015/11/03/Python深入上/" data-title="Python深入上 | louis.chen" data-tsina="2338582935" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/03/Python深入下/" title="Python深入下">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Python深入下</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/11/03/Python进阶下/"  title="Python进阶下">
+ <strong>下一篇：</strong><br/> 
+ <span>Python进阶下
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/11/03/Python深入上/" data-title="Python深入上" data-url="http://chenfuduo.me/2015/11/03/Python深入上/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#特殊方法与多范式"><span class="toc-number">1.</span> <span class="toc-text">特殊方法与多范式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符"><span class="toc-number">1.1.</span> <span class="toc-text">运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内置函数"><span class="toc-number">1.2.</span> <span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表（list）元素引用"><span class="toc-number">1.3.</span> <span class="toc-text">表（list）元素引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">1.4.</span> <span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#上下文管理器"><span class="toc-number">2.</span> <span class="toc-text">上下文管理器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭文件"><span class="toc-number">2.1.</span> <span class="toc-text">关闭文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义"><span class="toc-number">2.2.</span> <span class="toc-text">自定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的属性"><span class="toc-number">2.3.</span> <span class="toc-text">对象的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性的dict系统"><span class="toc-number">2.4.</span> <span class="toc-text">属性的dict系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特性"><span class="toc-number">2.5.</span> <span class="toc-text">特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用特殊方法getattr"><span class="toc-number">2.6.</span> <span class="toc-text">使用特殊方法getattr</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#即时生成属性的其他方式"><span class="toc-number">2.7.</span> <span class="toc-text">即时生成属性的其他方式</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Python学习/" title="Python学习">Python学习<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/机器学习/" title="机器学习">机器学习<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/移动开发/" title="移动开发">移动开发<sup>66</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/风景/" title="风景">风景<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/移动开发/" title="移动开发">移动开发<sup>66</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python学习/" title="Python学习">Python学习<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI-UE/" title="UI/UE">UI/UE<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Support-Library/" title="Design Support Library">Design Support Library<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自定义View/" title="自定义View">自定义View<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自定义控件/" title="自定义控件">自定义控件<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ViewDragHelper/" title="ViewDragHelper">ViewDragHelper<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/风景/" title="风景">风景<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/EventBus/" title="EventBus">EventBus<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bundle/" title="Bundle">Bundle<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.vogella.com/tutorials/android.html" target="_blank" title="Vogella">Vogella</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2338582935&verifier=59b78413&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> louis.chen,student of USTC,Focus on mobile develop. <br/>
+			It is my amibition to make beautiful apps.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2338582935" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/leerduo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="louis.chen">louis.chen</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"chenlouis"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F63c029dba1e367df2c8ffa39a309056a' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

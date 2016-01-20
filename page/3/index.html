@@ -1,0 +1,1094 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>louis.chen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="louis.chen">
+    
+
+    
+    <meta name="description" content="移动开发者,极端产品控。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="louis.chen">
+<meta property="og:url" content="http://chenfuduo.me/page/3/index.html">
+<meta property="og:site_name" content="louis.chen">
+<meta property="og:description" content="移动开发者,极端产品控。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="louis.chen">
+<meta name="twitter:description" content="移动开发者,极端产品控。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="louis.chen" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="louis.chen" title="louis.chen"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="louis.chen">louis.chen</a></h1>
+				<h2 class="blog-motto">纸上得来终觉浅,绝知此事要躬行。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/forever">小永远</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/project">项目</a></li>
+					
+						<li><a href="/about">资源</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:chenfuduo.me">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/12/从源码的角度分析为什么decodeResource-更消耗内存/" title="从源码的角度分析为什么decodeResource(...)更消耗内存" itemprop="url">从源码的角度分析为什么decodeResource(...)更消耗内存</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-12T08:10:15.000Z" itemprop="datePublished"> 发表于 2015-09-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><code>BitmapFactory</code>提供了几种不同的<code>decodexXX(...)</code>方法，原来这些方法在消耗内存上也有不同，其中<code>decodeResource(...)</code>更消耗内存.从源码的角度分析下。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/09/12/从源码的角度分析为什么decodeResource-更消耗内存/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/09/12/从源码的角度分析为什么decodeResource-更消耗内存/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/09/12/从源码的角度分析为什么decodeResource-更消耗内存/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/07/Android启动流程源码分析/" title="Android启动流程源码分析" itemprop="url">Android启动流程源码分析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-06T16:33:25.000Z" itemprop="datePublished"> 发表于 2015-09-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>启动过程分为<strong>三个</strong>阶段：</p>
+<blockquote>
+<ul>
+<li>BootLoader引导程序启动</li>
+<li>Linux Kernel内核启动</li>
+<li>Android系统启动</li>
+</ul>
+</blockquote>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/09/07/Android启动流程源码分析/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/09/07/Android启动流程源码分析/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/09/07/Android启动流程源码分析/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/03/下拉刷新/" title="下拉刷新" itemprop="url">下拉刷新</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-03T09:18:30.000Z" itemprop="datePublished"> 发表于 2015-09-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p><img src="http://7xljei.com1.z0.glb.clouddn.com/19.gif" alt="效果图"></p>
+<p>下拉刷新在很多应用中都可以看到，可以自己实现，也可以使用V4包下的<code>SwipeRefreshLayout</code>，或者使用第三方的开源控件，比如：<a href="https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh">android-Ultra-Pull-To-Refresh
+</a>。本篇是使用V4包下的<code>SwipeRefreshLayout</code>实现。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/09/03/下拉刷新/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/09/03/下拉刷新/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/09/03/下拉刷新/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/29/遇到的问题/" title="遇到的问题" itemprop="url">遇到的问题</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-29T13:17:18.000Z" itemprop="datePublished"> 发表于 2015-08-29</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <blockquote>
+<ul>
+<li><code>java.lang.UnsupportedOperationException: Required method destroyItem was not overridden</code></li>
+</ul>
+</blockquote>
+<p>在ViewPager的PagerAdapter方法中，我们通常重写四个方法，<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isViewFromObject</span><span class="params">(View arg0, Object arg1)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(View container, <span class="keyword">int</span> position, Object object)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">super</span>.destroyItem(container, position, object);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">instantiateItem</span><span class="params">(View container, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.instantiateItem(container, position);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>报这个错误是我在<code>destroyItem</code>方法中调用了<code>super.destroyItem(container, position, object)</code>方法，注释掉后就可以了。</p>
+<blockquote>
+<ul>
+<li>FastJson遇到的问题</li>
+</ul>
+</blockquote>
+<p>使用FastJson的时候，我遇到过下面的问题，这样的话解析不到值。</p>
+<ul>
+<li>提供了带参数的构造器的时候，必须提供无参数的构造器，否则报错。</li>
+<li>实体类必须提供get/set方法，否则解析不出来，两者缺一不可。</li>
+<li>实体类不能嵌套定义。否则报错。</li>
+<li>Json数据有对象和数组，数组类型的，比如我们定义<code>List&lt;User&gt; user...</code>这里后面的<code>user</code>一定要和数组名一样，不能是<code>userList</code>，否则解析不出来。</li>
+</ul>
+<blockquote>
+<ul>
+<li>Fragment 重叠(重影)问题</li>
+</ul>
+</blockquote>
+<p>这个经常遇到，具体的情况是，app 需要在多个 Fragment 间切换，<code>并且保存每个 Fragment 的状态</code>。官方的方法是使用 replace() 来替换 Fragment，<code>但是 replace() 的调用会导致 Fragment 的 onCreteView() 被调用</code>，<code>所以切换界面时会无法保存当前的状态</code>。因此一般采用 add()、hide()与 show()配合，来达到保存 Fragment 的状态。</p>
+<p>正常情况下显示是对的，现象发生在我切换到其他的app，操作一会之后，再回到当前的app，有一定几率会出现 Fragment 重叠的现象。</p>
+<p>可以通过下面的方式进行手动重现这个BUG:<br>1.手机的 “设置” - “开发者选项” - 打开”不保留活动”(主要用于模拟Activity被及时回收)<br>2.把 app 切换到后台，再重新打开，通过点按不同的 tab 来切换 Fragment</p>
+<p>起初我以为是我在使用add()、hide() 、show() 切换 Fragment 的时候有什么地方使用的不对，尝试去解决重叠的 bug，无果后，还是通过 google 找出了原因和解决方案。<br>原因</p>
+<p>使用 Fragment 的状态保存，当系统内存不足，Fragment 的宿主 Activity 回收的时候，Fragment 的实例并没有随之被回收。Activity 被系统回收时，会主动调用 onSaveInstance() 方法来保存视图层（View Hierarchy），所以当 Activity 通过导航再次被重建时，之前被实例化过的 Fragment 依然会出现在 Activity 中，此时的 FragmentTransaction 中的相当于又再次 add 了 fragment 进去的，hide()和show()方法对之前保存的fragment已经失效了。综上这些因素导致了多个Fragment重叠在一起。<br>解决</p>
+<p>方案一:<br>1.给每个 Fragment 加一个 Tag<br>2.在 onCreate(Bundle savedInstanceState) 中判断 Bundle savedInstanceState 是否不为空<br>3.不为空则进行 find Tag，重新给几个 frament 赋值<br>这样子仍是对之前保存的 fragment 操作，成功解决了重叠的问题。</p>
+<p>方案二:<br>Activity 中的 onSaveInstanceState() 里面有一句super.onSaveInstanceState(outState);，Google 对于这句话的解释是 “Always call the superclass so it can save the view hierarchy state”，大概意思是“总是执行这句代码来调用父类去保存视图层的状态”。通过注释掉这句话，这样主 Activity 因为种种原因被回收的时候就不会保存之前的 fragment state，也可以成功解决重叠的问题。</p>
+<p>参考<a href="http://www.cnblogs.com/chuanstone/p/4672096.html" target="_blank" rel="external">Android中管理多个Fragment的最佳实践，完美解决保存状态与重影问题</a></p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/08/29/遇到的问题/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/08/29/遇到的问题/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/26/华为机试题/" title="华为机试题" itemprop="url">华为机试题</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-26T03:02:15.000Z" itemprop="datePublished"> 发表于 2015-08-26</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>华为OJ的一些机试题目，为华为的机试做准备。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/08/26/华为机试题/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/08/26/华为机试题/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/08/26/华为机试题/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/24/Window-LFU/" title="Window LFU" itemprop="url">Window LFU</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-24T07:26:04.000Z" itemprop="datePublished"> 发表于 2015-08-24</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>阿里在线笔试的附加题:<br>实现一个window-LFU缓存（即置换指定时间内，按照LFU规则排序淘汰数量）要求对外提供的接口：</p>
+<ul>
+<li>可以指定cache的大小</li>
+<li>可以指定时间窗口（windows）</li>
+<li>提供get/put/remove数据访问方法</li>
+<li>提供缓存命中率hitrate数据访问量</li>
+</ul>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/08/24/Window-LFU/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/08/24/Window-LFU/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/08/24/Window-LFU/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/19/Circular-dependencies-cannot-exist-in-RelativeLayout/" title="Circular dependencies cannot exist in RelativeLayout" itemprop="url">Circular dependencies cannot exist in RelativeLayout</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-19T01:13:23.000Z" itemprop="datePublished"> 发表于 2015-08-19</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>在做自定义View的时候，遇到了下面的一个错误：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java.lang.IllegalStateException: Circular dependencies cannot exist in RelativeLayout</span><br></pre></td></tr></table></figure></p>
+<p>这个错误还是第一次遇到，主要是在<code>RelativeLayout</code>,有几个控件循环引用导致的。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/08/19/Circular-dependencies-cannot-exist-in-RelativeLayout/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/08/19/Circular-dependencies-cannot-exist-in-RelativeLayout/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/08/19/Circular-dependencies-cannot-exist-in-RelativeLayout/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/13/Guide文档翻译任务-大家快来参与吧/" title="Guide文档翻译任务-大家快来参与吧" itemprop="url">Guide文档翻译任务-大家快来参与吧</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-13T11:27:08.000Z" itemprop="datePublished"> 发表于 2015-08-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>一直在读Google的文档，很多内容还是非常不错的。而且，能够刷新我们对某些知识点的认识。经常在某博客上看见某专家写的文章有错误，或者以偏概全。<br>官方的开发文档是我们最宝贵的资料，比任何书，视频都宝贵。是我们学习Android的第一手资料。</p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/08/13/Guide文档翻译任务-大家快来参与吧/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/08/13/Guide文档翻译任务-大家快来参与吧/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/08/13/Guide文档翻译任务-大家快来参与吧/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/06/抓取已安装程序的布局信息/" title="抓取已安装程序的布局信息" itemprop="url">抓取已安装程序的布局信息</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-05T23:36:18.000Z" itemprop="datePublished"> 发表于 2015-08-06</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>下载企鹅的apk安装后，解压后，发现其混淆了代码和资源文件，如果想查看企鹅的布局怎么写？这里提出了一种解决方案。下面是运行的结果。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#60;com.tencent.widget.GridView&#10;08-05 23:13:59.672  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; gravity=0x11&#10;08-05 23:13:59.673  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131296687&#10;08-05 23:13:59.673  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; scrollbars=0x0&#10;08-05 23:13:59.673  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=-1&#10;08-05 23:13:59.673  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=-2&#10;08-05 23:13:59.673  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginLeft=20.0dip&#10;08-05 23:13:59.673  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginRight=20.0dip&#10;08-05 23:13:59.674  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; listSelector=@2130837670&#10;08-05 23:13:59.674  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; horizontalSpacing=15.0dip&#10;08-05 23:13:59.674  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; verticalSpacing=10.0dip&#10;08-05 23:13:59.675  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; stretchMode=2&#10;08-05 23:13:59.675  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; numColumns=4&#10;08-05 23:13:59.675  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;/LinearLayout&#62;&#10;08-05 23:13:59.675  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layoutName:AA&#10;08-05 23:13:59.676  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;RelativeLayout&#10;08-05 23:13:59.676  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131302399&#10;08-05 23:13:59.676  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; background=@2131427404&#10;08-05 23:13:59.676  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=-1&#10;08-05 23:13:59.677  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=-1&#10;08-05 23:13:59.677  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;RelativeLayout&#10;08-05 23:13:59.677  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; gravity=0x10&#10;08-05 23:13:59.677  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131298678&#10;08-05 23:13:59.677  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; paddingLeft=15.0dip&#10;08-05 23:13:59.677  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=-1&#10;08-05 23:13:59.677  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=-2&#10;08-05 23:13:59.679  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginTop=8.0dip&#10;08-05 23:13:59.679  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginBottom=8.0dip&#10;08-05 23:13:59.679  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;ImageView&#10;08-05 23:13:59.679  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_gravity=0x3&#10;08-05 23:13:59.680  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131297754&#10;08-05 23:13:59.680  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; background=@0&#10;08-05 23:13:59.680  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=21.0dip&#10;08-05 23:13:59.680  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=24.0dip&#10;08-05 23:13:59.680  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_alignParentLeft=true&#10;08-05 23:13:59.681  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_centerVertical=true&#10;08-05 23:13:59.681  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;TextView&#10;08-05 23:13:59.682  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; textSize=14.0sp&#10;08-05 23:13:59.682  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; textColor=@2131427931&#10;08-05 23:13:59.682  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; ellipsize=3&#10;08-05 23:13:59.682  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_gravity=0x3&#10;08-05 23:13:59.682  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131297755&#10;08-05 23:13:59.683  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=-2&#10;08-05 23:13:59.683  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=-2&#10;08-05 23:13:59.683  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginLeft=6.0dip&#10;08-05 23:13:59.683  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; text=@2131370323&#10;08-05 23:13:59.684  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; singleLine=true&#10;08-05 23:13:59.684  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_toRightOf=@2131297754&#10;08-05 23:13:59.684  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_centerVertical=true&#10;08-05 23:13:59.684  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;Button&#10;08-05 23:13:59.685  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; textSize=13.0sp&#10;08-05 23:13:59.685  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; gravity=0x11&#10;08-05 23:13:59.685  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131297756&#10;08-05 23:13:59.686  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=-2&#10;08-05 23:13:59.686  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=30.0dip&#10;08-05 23:13:59.686  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginRight=10.0dip&#10;08-05 23:13:59.686  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; text=@2131368869&#10;08-05 23:13:59.687  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_alignParentRight=true&#10;08-05 23:13:59.687  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_centerVertical=true&#10;08-05 23:13:59.688  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; style=@style/SmallButtonBlueNoSkin&#10;08-05 23:13:59.688  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;/RelativeLayout&#62;&#10;08-05 23:13:59.688  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;com.tencent.widget.MaxHeightRelativelayout&#10;08-05 23:13:59.688  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131302400&#10;08-05 23:13:59.688  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; background=@0&#10;08-05 23:13:59.689  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=-1&#10;08-05 23:13:59.690  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=160.0dip&#10;08-05 23:13:59.690  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_below=@2131298678&#10;08-05 23:13:59.690  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;RelativeLayout&#10;08-05 23:13:59.690  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131302401&#10;08-05 23:13:59.691  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=260.0dip&#10;08-05 23:13:59.691  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=160.0dip&#10;08-05 23:13:59.692  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginTop=5.0dip&#10;08-05 23:13:59.693  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginBottom=10.0dip&#10;08-05 23:13:59.693  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_centerInParent=true&#10;08-05 23:13:59.694  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;com.tencent.mobileqq.richstatus.RichStatusEditText&#10;08-05 23:13:59.694  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; textSize=14.0sp&#10;08-05 23:13:59.694  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; textColor=@2131427981&#10;08-05 23:13:59.694  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; gravity=0x33&#10;08-05 23:13:59.694  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131302402&#10;08-05 23:13:59.695  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; background=@2130840676&#10;08-05 23:13:59.695  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; padding=20.0dip&#10;08-05 23:13:59.696  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=307.0dip&#10;08-05 23:13:59.697  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=130.0dip&#10;08-05 23:13:59.697  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginTop=5.0dip&#10;08-05 23:13:59.698  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; text=123&#10;08-05 23:13:59.698  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; maxLines=3&#10;08-05 23:13:59.698  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; singleLine=false&#10;08-05 23:13:59.698  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_above=@2131302403&#10;08-05 23:13:59.698  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; lineSpacingExtra=2.0dip&#10;08-05 23:13:59.698  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; inputType=0x20001&#10;08-05 23:13:59.699  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;requestFocus&#10;08-05 23:13:59.699  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; &#60;LinearLayout&#10;08-05 23:13:59.699  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; gravity=0x13&#10;08-05 23:13:59.700  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; id=@2131302403&#10;08-05 23:13:59.701  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; paddingLeft=8.0dip&#10;08-05 23:13:59.701  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_width=-2&#10;08-05 23:13:59.701  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_height=30.0dip&#10;08-05 23:13:59.702  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_marginTop=5.0dip&#10;08-05 23:13:59.702  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_alignRight=@2131302402&#10;08-05 23:13:59.702  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_alignParentRight=true&#10;08-05 23:13:59.702  31925-31925/me.chenfuduo.mylayoutparse E/MyService&#65109; layout_alignParentBottom=true</span><br></pre></td></tr></table></figure>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/08/06/抓取已安装程序的布局信息/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/08/06/抓取已安装程序的布局信息/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/08/06/抓取已安装程序的布局信息/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/03/Networking-and-Models/" title="Networking and Models" itemprop="url">Networking and Models</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="louis.chen" target="_blank" itemprop="author">louis.chen</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-03T01:35:57.000Z" itemprop="datePublished"> 发表于 2015-08-03</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>本部分是网络开发的部分，现阶段实现了：</p>
+<blockquote>
+<ul>
+<li>发送基本的网络请求</li>
+<li>使用第三方的开源库发送网络请求</li>
+<li>图片加载</li>
+<li>使用第三方的开源库加载图片</li>
+<li>JSON的解析，通过新浪微博的数据，天气预报的数据，电影的数据</li>
+</ul>
+</blockquote>
+<p>以上08-03更新。</p>
+<blockquote>
+<ul>
+<li>AsyncTask</li>
+</ul>
+</blockquote>
+<p>以上08-06更新。</p>
+<blockquote>
+<ul>
+<li>Volley</li>
+<li>Socket</li>
+<li>Fresco<br>以上08-08更新。</li>
+</ul>
+</blockquote>
+<p>部分效果图：</p>
+<p><img src="http://1.avatarinfo.sinaapp.com/pic/3.png" width="340" /><br><img src="http://1.avatarinfo.sinaapp.com/pic/18.gif" width="340" /></p>
+<p><img src="http://1.avatarinfo.sinaapp.com/pic/4.png" width="340" /><br><img src="http://1.avatarinfo.sinaapp.com/pic/5.png" width="340" /></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/08/03/Networking-and-Models/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/移动开发/">移动开发</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动开发/">移动开发</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/08/03/Networking-and-Models/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/08/03/Networking-and-Models/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Python学习/" title="Python学习">Python学习<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/机器学习/" title="机器学习">机器学习<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/移动开发/" title="移动开发">移动开发<sup>66</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/风景/" title="风景">风景<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/移动开发/" title="移动开发">移动开发<sup>66</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Python学习/" title="Python学习">Python学习<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI-UE/" title="UI/UE">UI/UE<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Design-Support-Library/" title="Design Support Library">Design Support Library<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自定义View/" title="自定义View">自定义View<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自定义控件/" title="自定义控件">自定义控件<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ViewDragHelper/" title="ViewDragHelper">ViewDragHelper<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/机器学习/" title="机器学习">机器学习<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/风景/" title="风景">风景<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/EventBus/" title="EventBus">EventBus<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Bundle/" title="Bundle">Bundle<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.vogella.com/tutorials/android.html" target="_blank" title="Vogella">Vogella</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=2338582935&verifier=59b78413&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> louis.chen,student of USTC,Focus on mobile develop. <br/>
+			It is my amibition to make beautiful apps.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/2338582935" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/leerduo" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="louis.chen">louis.chen</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"chenlouis"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F63c029dba1e367df2c8ffa39a309056a' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+	<a href="https://github.com/leerduo"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+ </html>
